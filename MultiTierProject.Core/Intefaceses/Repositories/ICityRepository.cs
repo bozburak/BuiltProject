@@ -5,6 +5,6 @@ namespace MultiTierProject.Core.Intefaceses.Repositories
 {
     public interface ICityRepository : IRepository<City>
     {
-        Task<Region> GetWithRegionByIdAsync(int cityId);
+        Task<City> GetWithRegionByIdAsync(int cityId);
     }
 }

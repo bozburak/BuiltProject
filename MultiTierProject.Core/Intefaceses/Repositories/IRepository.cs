@@ -9,11 +9,11 @@ namespace MultiTierProject.Core.Intefaceses.Repositories
     {
         Task<TEntity> GetByIdAsync(int id);
         Task<IEnumerable<TEntity>> GetAllAsync(int id);
-        Task<IEnumerable<TEntity>> Find(Expression<Func<TEntity, bool>> predicate);
-        Task<TEntity> AddAsync();
-        Task<TEntity> AddRangeAsync();
+        IEnumerable<TEntity> Where(Expression<Func<TEntity, bool>> predicate);
+        Task AddAsync(TEntity entity);
+        Task AddRangeAsync(IEnumerable<TEntity> entities);
         void Remove(TEntity entity);
-        void RemoveRange(IEnumerable<TEntity> entity);
+        void RemoveRange(IEnumerable<TEntity> entities);
         TEntity Update(TEntity entity);
     }
 }

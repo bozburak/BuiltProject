@@ -5,6 +5,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.2">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\MultiTierProject.Core\MultiTierProject.Core.csproj" />
     <ProjectReference Include="..\MultiTierProject.Data\MultiTierProject.Data.csproj" />
     <ProjectReference Include="..\MultiTierProject.Service\MultiTierProject.Service.csproj" />
