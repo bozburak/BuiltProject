@@ -5,6 +5,6 @@ namespace MultiTierProject.Core.Intefaceses.Services
 {
     public interface ICityService : IService<City>
     {
-        Task<Region> GetWithRegionByIdAsync(int cityId);
+        Task<City> GetWithRegionByIdAsync(int cityId);
     }
 }

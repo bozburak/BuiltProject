@@ -8,10 +8,10 @@ namespace MultiTierProject.Core.Intefaceses.Services
     public interface IService<TEntity> where TEntity:class
     {
         Task<TEntity> GetByIdAsync(int id);
-        Task<IEnumerable<TEntity>> GetAllAsync(int id);
-        Task<IEnumerable<TEntity>> Find(Expression<Func<TEntity, bool>> predicate);
-        Task<TEntity> AddAsync();
-        Task<TEntity> AddRangeAsync();
+        Task<IEnumerable<TEntity>> GetAllAsync();
+        IEnumerable<TEntity> Where(Expression<Func<TEntity, bool>> predicate);
+        Task<TEntity> AddAsync(TEntity entity);
+        Task<IEnumerable<TEntity>> AddRangeAsync(IEnumerable<TEntity> entities);
         void Remove(TEntity entity);
         void RemoveRange(IEnumerable<TEntity> entity);
         TEntity Update(TEntity entity);

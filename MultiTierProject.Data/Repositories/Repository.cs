@@ -33,7 +33,7 @@ namespace MultiTierProject.Data.Repositories
             return _dbSet.Where(predicate);
         }
 
-        public async Task<IEnumerable<TEntity>> GetAllAsync(int id)
+        public async Task<IEnumerable<TEntity>> GetAllAsync()
         {
             return await _dbSet.ToListAsync();
         }

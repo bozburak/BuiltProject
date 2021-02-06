@@ -17,5 +17,9 @@
     <ProjectReference Include="..\MultiTierProject.Service\MultiTierProject.Service.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Controllers\" />
+  </ItemGroup>
+
 
 </Project>
