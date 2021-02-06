@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
-namespace MultiTierProject.Core.Inteface.Repository
+namespace MultiTierProject.Core.Inteface.Service
 {
-    public interface IRepository<TEntity> where TEntity : class
+    public interface IService<TEntity> where TEntity:class
     {
         Task<TEntity> GetByIdAsync(int id);
         Task<IEnumerable<TEntity>> GetAllAsync(int id);

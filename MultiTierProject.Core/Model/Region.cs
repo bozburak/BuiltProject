@@ -5,7 +5,7 @@ using System.Text;
 
 namespace MultiTierProject.Core.Model
 {
-    internal class Region
+    public class Region
     {
         public Region()
         {
