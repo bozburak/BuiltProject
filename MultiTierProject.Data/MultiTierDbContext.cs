@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MultiTierProject.Core.Models;
 using MultiTierProject.Data.Configurations;
+using MultiTierProject.Data.Seeds;
 
 namespace MultiTierProject.Data
 {
@@ -13,6 +14,9 @@ namespace MultiTierProject.Data
         {
             modelBuilder.ApplyConfiguration(new CityConfiguration());
             modelBuilder.ApplyConfiguration(new RegionConfiguration());
+
+            modelBuilder.ApplyConfiguration(new CitySeed(new int[] { 1, 2, 3 }));
+            modelBuilder.ApplyConfiguration(new RegionSeed(new int[] { 1, 2, 3 }));
         }
     }
 }
