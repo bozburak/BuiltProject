@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace MultiTierProject.Core.Model
+﻿namespace MultiTierProject.Core.Models
 {
     public class City
     {

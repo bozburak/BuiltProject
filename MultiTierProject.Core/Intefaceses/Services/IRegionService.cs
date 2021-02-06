@@ -1,10 +1,7 @@
-﻿using MultiTierProject.Core.Model;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using MultiTierProject.Core.Models;
 using System.Threading.Tasks;
 
-namespace MultiTierProject.Core.Inteface.Service
+namespace MultiTierProject.Core.Intefaceses.Services
 {
     public interface IRegionService : IService<Region>
     {
