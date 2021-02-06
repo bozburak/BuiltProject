@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30907.101
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MultiTierProject.API", "MultiTierProject.API\MultiTierProject.API.csproj", "{250A56FE-3C0F-446D-9584-4D7A6C5D0AD0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MultiTierProject.API", "MultiTierProject.API\MultiTierProject.API.csproj", "{250A56FE-3C0F-446D-9584-4D7A6C5D0AD0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MultiTierProject.Core", "MultiTierProject.Core\MultiTierProject.Core.csproj", "{19B8BF73-410B-4AFC-AC71-9916612C31A0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MultiTierProject.Core", "MultiTierProject.Core\MultiTierProject.Core.csproj", "{19B8BF73-410B-4AFC-AC71-9916612C31A0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MultiTierProject.Data", "MultiTierProject.Data\MultiTierProject.Data.csproj", "{825DBEDB-FAA3-4684-993C-D79726A161FB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MultiTierProject.Data", "MultiTierProject.Data\MultiTierProject.Data.csproj", "{825DBEDB-FAA3-4684-993C-D79726A161FB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MultiTierProject.Service", "MultiTierProject.Service\MultiTierProject.Service.csproj", "{0F0605AF-6893-443F-91D6-54C9C83A44EC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MultiTierProject.Service", "MultiTierProject.Service\MultiTierProject.Service.csproj", "{0F0605AF-6893-443F-91D6-54C9C83A44EC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
