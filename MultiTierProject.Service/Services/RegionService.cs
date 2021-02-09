@@ -8,23 +8,15 @@ namespace MultiTierProject.Service.Services
 {
     public class RegionService : Service<Region>, IRegionService
     {
-        ////private readonly IRegionRepository _regionRepository;
-        //public RegionService(IUnitOfWork unitOfWork, IRepository<Region> repository, IRegionRepository regionRepository) : base(unitOfWork, repository)
-        //{
-        //    _regionRepository = regionRepository;
-        //}
-        public RegionService(IUnitOfWork unitOfWork, IRepository<Region> repository) : base(unitOfWork, repository)
+        private readonly IRegionRepository _regionRepository;
+        public RegionService(IUnitOfWork unitOfWork, IRepository<Region> repository, IRegionRepository regionRepository) : base(unitOfWork, repository)
         {
+            _regionRepository = regionRepository;
         }
 
-        public Task<Region> GetWithCitiesByIdAsync(int regionId)
+        async Task<Region> IRegionService.GetWithCitiesByIdAsync(int regionId)
         {
-            throw new System.NotImplementedException();
+            return await _regionRepository.GetWithCitiesByIdAsync(regionId);
         }
-
-        //async Task<Region> IRegionService.GetWithCitiesByIdAsync(int regionId)
-        //{
-        //    return await _regionRepository.GetWithCitiesByIdAsync(regionId);
-        //}
     }
 }

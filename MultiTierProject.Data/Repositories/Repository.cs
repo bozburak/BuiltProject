@@ -13,7 +13,7 @@ namespace MultiTierProject.Data.Repositories
         protected readonly DbContext _context;
         private readonly DbSet<TEntity> _dbSet;
 
-        public Repository(DbContext dbContext)
+        public Repository(MultiTierDbContext dbContext)
         {
             _context = dbContext;
             _dbSet = _context.Set<TEntity>();
