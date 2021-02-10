@@ -55,16 +55,20 @@ namespace MultiTierProject.Service.Services
         public void Remove(TEntity entity)
         {
             _repository.Remove(entity);
+            _unitOfWork.Commit();
         }
 
         public void RemoveRange(IEnumerable<TEntity> entity)
         {
             _repository.RemoveRange(entity);
+            _unitOfWork.Commit();
         }
 
         public TEntity Update(TEntity entity)
         {
-            return _repository.Update(entity);
+            var result = _repository.Update(entity);
+            _unitOfWork.CommitAsync();
+            return result;
         }
     }
 }

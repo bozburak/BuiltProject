@@ -1,10 +1,6 @@
 ﻿using AutoMapper;
 using MultiTierProject.API.AutoMapper.DTOs;
 using MultiTierProject.Core.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace MultiTierProject.API.AutoMapper.Mapping
 {
@@ -14,6 +10,12 @@ namespace MultiTierProject.API.AutoMapper.Mapping
         {
             CreateMap<Region, RegionDto>();
             CreateMap<RegionDto, Region>();
+            CreateMap<CityDto, City>();
+            CreateMap<City, CityDto>();
+            CreateMap<Region, RegionWithCityDto>();
+            CreateMap<RegionWithCityDto, Region>();
+            CreateMap<City, CityWithRegionDto>();
+            CreateMap<CityWithRegionDto, City>();
         }
     }
 }

@@ -10,11 +10,11 @@ namespace MultiTierProject.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class RegionController : ControllerBase
+    public class RegionsController : ControllerBase
     {
         private readonly IRegionService _regionService;
         private readonly IMapper _mapper;
-        public RegionController(IRegionService regionService, IMapper mapper)
+        public RegionsController(IRegionService regionService, IMapper mapper)
         {
             _regionService = regionService;
             _mapper = mapper;
@@ -31,7 +31,7 @@ namespace MultiTierProject.API.Controllers
         public async Task<IActionResult> GetById(int id)
         {
             var region = await _regionService.GetByIdAsync(id);
-            return Ok(_mapper.Map<IEnumerable<RegionDto>>(region));
+            return Ok(_mapper.Map<RegionDto>(region));
         }
 
         [HttpPost]
@@ -54,6 +54,13 @@ namespace MultiTierProject.API.Controllers
             var region = _regionService.GetByIdAsync(id).Result;
             _regionService.Remove(region);
             return NoContent();
+        }
+
+        [HttpGet("{id}/cities")]
+        public async Task<IActionResult> GetWithCitiesByIdAsync(int id)
+        {
+            var region = await _regionService.GetWithCitiesByIdAsync(id);
+            return Ok(_mapper.Map<RegionWithCityDto>(region));
         }
     }
 }
