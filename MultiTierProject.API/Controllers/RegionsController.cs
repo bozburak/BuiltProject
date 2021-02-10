@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using MultiTierProject.API.AutoMapper.DTOs;
+using MultiTierProject.API.Filters;
 using MultiTierProject.Core.Intefaceses.Services;
 using MultiTierProject.Core.Models;
 using System.Collections.Generic;
@@ -27,6 +28,7 @@ namespace MultiTierProject.API.Controllers
             return Ok(_mapper.Map<IEnumerable<RegionDto>>(regions));
         }
 
+        [ServiceFilter(typeof(NotFoundFilter<Region>))]
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
         {
@@ -34,6 +36,7 @@ namespace MultiTierProject.API.Controllers
             return Ok(_mapper.Map<RegionDto>(region));
         }
 
+        [ValidationFilter]
         [HttpPost]
         public async Task<IActionResult> Save(RegionDto region)
         {
@@ -48,6 +51,7 @@ namespace MultiTierProject.API.Controllers
             return NoContent();
         }
 
+        [ServiceFilter(typeof(NotFoundFilter<Region>))]
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
@@ -56,6 +60,7 @@ namespace MultiTierProject.API.Controllers
             return NoContent();
         }
 
+        [ServiceFilter(typeof(NotFoundFilter<Region>))]
         [HttpGet("{id}/cities")]
         public async Task<IActionResult> GetWithCitiesByIdAsync(int id)
         {

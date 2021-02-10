@@ -1,12 +1,15 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using MultiTierProject.API.Filters;
 using MultiTierProject.Core.Intefaceses.Repositories;
 using MultiTierProject.Core.Intefaceses.Services;
 using MultiTierProject.Core.Intefaceses.UnitOfWorks;
+using MultiTierProject.Core.Models;
 using MultiTierProject.Data;
 using MultiTierProject.Data.Repositories;
 using MultiTierProject.Data.UnitOfWorks;
@@ -39,8 +42,16 @@ namespace MultiTierProject.API
             services.AddScoped(typeof(IService<>), typeof(Service.Services.Service<>));
             services.AddScoped<IRegionService, RegionService>();
             services.AddScoped<ICityService, CityService>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>(); 
+            services.AddScoped(typeof(NotFoundFilter<>));
+
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddControllers();
+
+            services.Configure<ApiBehaviorOptions>(options =>
+            {
+                options.SuppressModelStateInvalidFilter = true;
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
