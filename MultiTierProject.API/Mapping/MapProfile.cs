@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using MultiTierProject.API.AutoMapper.DTOs;
+using MultiTierProject.Core.AutoMapper.DTOs;
 using MultiTierProject.Core.Models;
 
 namespace MultiTierProject.API.AutoMapper.Mapping

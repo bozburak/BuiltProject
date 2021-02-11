@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
-using MultiTierProject.API.AutoMapper.DTOs;
+using MultiTierProject.Core.AutoMapper.DTOs;
 using System.Collections.Generic;
 using System.Linq;
 

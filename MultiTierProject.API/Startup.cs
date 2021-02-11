@@ -5,11 +5,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using MultiTierProject.API.Extension;
 using MultiTierProject.API.Filters;
 using MultiTierProject.Core.Intefaceses.Repositories;
 using MultiTierProject.Core.Intefaceses.Services;
 using MultiTierProject.Core.Intefaceses.UnitOfWorks;
-using MultiTierProject.Core.Models;
 using MultiTierProject.Data;
 using MultiTierProject.Data.Repositories;
 using MultiTierProject.Data.UnitOfWorks;
@@ -61,6 +61,8 @@ namespace MultiTierProject.API
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseCustomExceptio();
 
             app.UseHttpsRedirection();
 
