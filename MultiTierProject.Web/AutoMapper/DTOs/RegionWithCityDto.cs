@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace MultiTierProject.Core.AutoMapper.DTOs
+namespace MultiTierProject.Web.AutoMapper.DTOs
 {
     public class RegionWithCityDto : RegionDto
     {

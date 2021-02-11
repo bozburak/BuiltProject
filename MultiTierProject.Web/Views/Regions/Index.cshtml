@@ -1,0 +1,102 @@
+﻿@model List<RegionDto>
+
+    <h2 class="text-center">Regions</h2>
+
+    <div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="createModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="createModalLabel">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3">
+                            <label for="exampleInputName" class="form-label">Name</label>
+                            <input id="region-name" type="text" class="form-control">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button id="add-region" type="button" class="btn btn-primary">Add</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Id</th>
+                <th scope="col">Name</th>
+                <th scope="col">Processes</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (int i = 0; i < Model.Count; i++)
+            {
+                <tr>
+                    <th class="sec" scope="row">@i</th>
+                    <td>@Model[i].Id</td>
+                    <td>
+                        <button type="button" class="btn btn-info">Update</button>
+                        <button id="remove-region" type="button" class="btn btn-danger" region-id="@Model[i].Id">Remove</button>
+                    </td>
+                    <td></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <div class="row">
+        <button type="button" class="btn btn-primary ml-auto" data-toggle="modal" data-target="#createModal">
+            Add Region
+        </button>
+    </div>
+
+    @section Scripts {
+        <script>
+            $("#add-region").click(function () {
+                var data = { name: $("#region-name").val() };
+
+                GenericPostMethod("/Regions/Create", 'POST', data, onSuccess, onError);
+
+                function onSuccess(data) {
+                    console.log(data);
+                    var x = JSON.parse(data)
+                    var nextId = parseInt($('table tbody tr:last th').html());
+                    $('table tbody').append('<tr><th>' + (nextId + 1) + '</th><td>' + x.Id + '</td><td>' + x.Name + '</td></tr>');
+                    $('#createModal').modal('hide')
+                    $('#region-name').val('')
+                }
+
+                function onError(data) {
+                    console.log(data);
+                    alert(data.responseText);
+                }
+            });
+
+            $("#remove-region").click(function () {
+                var data = { id: $("#region-id").val() };
+
+                GenericPostMethod("/Regions/Remove", 'DELETE', data, onSuccess, onError);
+
+                function onSuccess(data) {
+                    console.log(data);
+                    var x = JSON.parse(data)
+                    var nextId = parseInt($('table tbody tr:last th').html());
+                    $('table tbody').append('<tr><th>' + (nextId + 1) + '</th><td>' + x.Id + '</td><td>' + x.Name + '</td></tr>');
+                    $('#createModal').modal('hide')
+                    $('#region-name').val('')
+                }
+
+                function onError(data) {
+                    console.log(data);
+                    alert(data.responseText);
+                }
+            });
+        </script>
+    }

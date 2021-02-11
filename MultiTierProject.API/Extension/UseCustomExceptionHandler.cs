@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Http;
-using MultiTierProject.Core.AutoMapper.DTOs;
+using MultiTierProject.API.AutoMapper.DTOs;
 using Newtonsoft.Json;
 
 namespace MultiTierProject.API.Extension

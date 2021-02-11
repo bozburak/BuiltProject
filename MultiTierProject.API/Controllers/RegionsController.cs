@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using MultiTierProject.Core.AutoMapper.DTOs;
+using MultiTierProject.API.AutoMapper.DTOs;
 using MultiTierProject.API.Filters;
 using MultiTierProject.Core.Intefaceses.Services;
 using MultiTierProject.Core.Models;

@@ -1,6 +1,6 @@
-﻿using MultiTierProject.Core.AutoMapper.DTOs;
+﻿using MultiTierProject.Web.AutoMapper.DTOs;
 
-namespace MultiTierProject.Core.AutoMapper.DTOs
+namespace MultiTierProject.Web.AutoMapper.DTOs
 {
     public class CityWithRegionDto : CityDto
     {

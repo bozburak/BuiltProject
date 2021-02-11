@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
-using MultiTierProject.Core.AutoMapper.DTOs;
+using MultiTierProject.API.AutoMapper.DTOs;
 using MultiTierProject.Core.Intefaceses.Services;
 
 namespace MultiTierProject.API.Filters

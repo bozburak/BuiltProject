@@ -1,21 +1,20 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using MultiTierProject.API.Extension;
-using MultiTierProject.API.Filters;
 using MultiTierProject.Core.Intefaceses.Repositories;
 using MultiTierProject.Core.Intefaceses.Services;
 using MultiTierProject.Core.Intefaceses.UnitOfWorks;
+using MultiTierProject.Core.Models;
 using MultiTierProject.Data;
 using MultiTierProject.Data.Repositories;
 using MultiTierProject.Data.UnitOfWorks;
 using MultiTierProject.Service.Services;
+using Newtonsoft.Json.Serialization;
 
-namespace MultiTierProject.API
+namespace MultiTierProject.Web
 {
     public class Startup
     {
@@ -29,6 +28,7 @@ namespace MultiTierProject.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            //services.AddMvc().AddJsonOptions(options => options.SerializerSettings.ContractResolver = new DefaultContractResolver());
             services.AddDbContext<MultiTierDbContext>(options => {
                 options.UseSqlServer(Configuration["ConnectionStrings:SqlConStr"].ToString(), o =>
                 {
@@ -42,15 +42,9 @@ namespace MultiTierProject.API
             services.AddScoped(typeof(IService<>), typeof(Service.Services.Service<>));
             services.AddScoped<IRegionService, RegionService>();
             services.AddScoped<ICityService, CityService>();
-            services.AddScoped<IUnitOfWork, UnitOfWork>(); 
-            services.AddScoped(typeof(NotFoundFilter<>));
-
-            services.Configure<ApiBehaviorOptions>(options =>
-            {
-                options.SuppressModelStateInvalidFilter = true;
-            });
-
-            services.AddControllers();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddScoped<Region, Region>();
+            services.AddControllersWithViews();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -60,10 +54,14 @@ namespace MultiTierProject.API
             {
                 app.UseDeveloperExceptionPage();
             }
-
-            app.UseCustomExceptio();
-
+            else
+            {
+                app.UseExceptionHandler("/Home/Error");
+                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+                app.UseHsts();
+            }
             app.UseHttpsRedirection();
+            app.UseStaticFiles();
 
             app.UseRouting();
 
@@ -71,7 +69,9 @@ namespace MultiTierProject.API
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllers();
+                endpoints.MapControllerRoute(
+                    name: "default",
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
             });
         }
     }
