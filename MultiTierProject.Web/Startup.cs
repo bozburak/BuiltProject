@@ -4,15 +4,14 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using MultiTierProject.Web.Filters;
 using MultiTierProject.Core.Intefaceses.Repositories;
 using MultiTierProject.Core.Intefaceses.Services;
 using MultiTierProject.Core.Intefaceses.UnitOfWorks;
-using MultiTierProject.Core.Models;
 using MultiTierProject.Data;
 using MultiTierProject.Data.Repositories;
 using MultiTierProject.Data.UnitOfWorks;
 using MultiTierProject.Service.Services;
-using Newtonsoft.Json.Serialization;
 
 namespace MultiTierProject.Web
 {
@@ -28,7 +27,6 @@ namespace MultiTierProject.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            //services.AddMvc().AddJsonOptions(options => options.SerializerSettings.ContractResolver = new DefaultContractResolver());
             services.AddDbContext<MultiTierDbContext>(options => {
                 options.UseSqlServer(Configuration["ConnectionStrings:SqlConStr"].ToString(), o =>
                 {
@@ -43,8 +41,8 @@ namespace MultiTierProject.Web
             services.AddScoped<IRegionService, RegionService>();
             services.AddScoped<ICityService, CityService>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
-            services.AddScoped<Region, Region>();
-            services.AddControllersWithViews();
+            services.AddScoped(typeof(NotFoundFilter<>));
+            services.AddControllersWithViews().AddRazorRuntimeCompilation();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

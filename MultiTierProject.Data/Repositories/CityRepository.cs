@@ -8,11 +8,11 @@ namespace MultiTierProject.Data.Repositories
 {
     public class CityRepository : Repository<City>, ICityRepository
     {
-        private MultiTierDbContext MultiTierDbContext { get => _context as MultiTierDbContext; }
+        private MultiTierDbContext _multiTierDbContext { get => _context as MultiTierDbContext; }
         public CityRepository(MultiTierDbContext dbContext) : base(dbContext) { }
         public async Task<City> GetWithRegionByIdAsync(int cityId)
         {
-            return await MultiTierDbContext.Cities.Include(x => x.Region).SingleOrDefaultAsync(x => x.Id == cityId);
+            return await _multiTierDbContext.Cities.Include(x => x.Region).SingleOrDefaultAsync(x => x.Id == cityId);
         }
     }
 }
