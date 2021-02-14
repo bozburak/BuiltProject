@@ -48,7 +48,7 @@ namespace MultiTierProject.API.Controllers
         public IActionResult Update(RegionDto region)
         {
             var updateRegion = _regionService.Update(_mapper.Map<Region>(region));
-            return NoContent();
+            return Ok(_mapper.Map<RegionDto>(region));
         }
 
         [ServiceFilter(typeof(NotFoundFilter<Region>))]
@@ -57,7 +57,7 @@ namespace MultiTierProject.API.Controllers
         {
             var region = _regionService.GetByIdAsync(id).Result;
             _regionService.Remove(region);
-            return NoContent();
+            return Ok(_mapper.Map<RegionDto>(region));
         }
 
         [ServiceFilter(typeof(NotFoundFilter<Region>))]

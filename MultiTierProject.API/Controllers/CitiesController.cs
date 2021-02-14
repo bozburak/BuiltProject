@@ -48,7 +48,7 @@ namespace MultiTierProject.API.Controllers
         public IActionResult Update(CityDto city)
         {
             var updatecity = _cityService.Update(_mapper.Map<City>(city));
-            return NoContent();
+            return Ok(_mapper.Map<CityDto>(updatecity));
         }
 
         [ServiceFilter(typeof(NotFoundFilter<City>))]
@@ -57,7 +57,7 @@ namespace MultiTierProject.API.Controllers
         {
             var city = _cityService.GetByIdAsync(id).Result;
             _cityService.Remove(city);
-            return NoContent();
+            return Ok(_mapper.Map<CityDto>(city));
         }
 
         [ServiceFilter(typeof(NotFoundFilter<City>))]

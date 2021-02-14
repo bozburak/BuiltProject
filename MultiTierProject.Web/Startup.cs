@@ -12,6 +12,8 @@ using MultiTierProject.Data;
 using MultiTierProject.Data.Repositories;
 using MultiTierProject.Data.UnitOfWorks;
 using MultiTierProject.Service.Services;
+using System;
+using MultiTierProject.Web.ClientServiceses;
 
 namespace MultiTierProject.Web
 {
@@ -42,6 +44,10 @@ namespace MultiTierProject.Web
             services.AddScoped<ICityService, CityService>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped(typeof(NotFoundFilter<>));
+            services.AddHttpClient<RegionClientService>(opt =>
+            {
+                opt.BaseAddress = new Uri(Configuration["RequestUri"]);
+            });
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
         }
 

@@ -66,16 +66,26 @@
 
             function onSuccess(data) {
                 console.log(data);
-                var x = JSON.parse(data)
-                var nextId = parseInt($('table tbody tr:last th').html());
-                $('table tbody').append('<tr id="' + x.Id + '"><th>' + (nextId + 1) + '</th><td>' + x.Id + '</td><td><input type="text" class="form-control update-region-' + x.Id + '" old-value="' + x.Name + '" value="' + x.Name + '"></td><td><button type="button" class="btn btn-info update-region" region-name="' + x.Name + '" region-id="' + x.Id + '">Update</button> <button type="button" class="btn btn-danger remove-region" region-name="' + x.Name + '" region-id="' + x.Id + '">Remove</button></td></tr>');
-                $('#createModal').modal('hide')
-                $('#region-name').val('')
+                if (data && data != undefined && data != '' && data != null && data != 'null') {
+                    if (data.errors && data.errors != undefined && data.errors != '' && data.errors != null) {
+                        alert(data.errors);
+                    }
+                    else {
+                        var x = JSON.parse(data)
+                        var nextId = parseInt($('table tbody tr:last th').html());
+                        $('table tbody').append('<tr id="' + x.Id + '"><th>' + (nextId + 1) + '</th><td>' + x.Id + '</td><td><input type="text" class="form-control update-region-' + x.Id + '" old-value="' + x.Name + '" value="' + x.Name + '"></td><td><button type="button" class="btn btn-info update-region" region-name="' + x.Name + '" region-id="' + x.Id + '">Update</button> <button type="button" class="btn btn-danger remove-region" region-name="' + x.Name + '" region-id="' + x.Id + '">Remove</button></td></tr>');
+                        $('#createModal').modal('hide')
+                        $('#region-name').val('')
+                    }
+                }
+                else {
+                    alert("unexpected error.");
+                }
             }
 
             function onError(data) {
                 console.log(data);
-                alert(data.responseText);
+                alert(data?.responseText);
             }
         });
 
@@ -87,25 +97,30 @@
 
             function onSuccess(data) {
                 console.log(data);
-                if (data.errors && data.errors != undefined && data.errors != '' && data.errors != null) {
-                    alert(data.errors);
+                if (data && data != undefined && data != '' && data != null && data != 'null') {
+                    if (data.errors && data.errors != undefined && data.errors != '' && data.errors != null) {
+                        alert(data.errors);
+                    }
+                    else {
+                        $("#" + id).remove();
+                        var table = document.getElementById('tblOne');
+
+                        var rowLength = table.rows.length - 1;
+
+                        for (var i = 0; i < rowLength; i += 1) {
+                            var row = table.rows[(i + 1)];
+                            $(row).find("th").html(i)
+                        }
+                    }
                 }
                 else {
-                    $("#" + id).remove();
-                    var table = document.getElementById('tblOne');
-
-                    var rowLength = table.rows.length - 1;
-
-                    for (var i = 0; i < rowLength; i += 1) {
-                        var row = table.rows[(i + 1)];
-                        $(row).find("th").html(i)
-                    }
+                    alert("unexpected error.");
                 }
             }
 
             function onError(data) {
                 console.log(data);
-                alert(data.responseText);
+                alert(data?.responseText);
             }
         });
 
@@ -119,13 +134,17 @@
 
             function onSuccess(data) {
                 console.log(data);
-                if (data.errors && data.errors != undefined && data.errors != '' && data.errors != null) {
-                    alert(data.errors);
+                if (data && data != undefined && data != '' && data != null && data != 'null') {
+                    if (data.errors && data.errors != undefined && data.errors != '' && data.errors != null) {
+                        alert(data.errors);
+                    }
+                    else {
+                        $(".update-region-" + id + "").attr("old-value", name);
+                        alert('successful - ' + name + '');
+                    }
                 }
                 else {
-                    var x = JSON.parse(data);
-                    $(".update-region-" + id + "").attr("old-value", x.Name);
-                    alert('successful - ' + x.Name + '');
+                    alert("unexpected error.");
                 }
             }
 
@@ -133,7 +152,7 @@
                 var oldValue = $(".update-region-" + id + "").attr("old-value");
                 $(".update-region-" + id + "").val(oldValue);
                 console.log(data);
-                alert(data.responseText);
+                alert(data?.responseText);
             }
         });
     </script>
