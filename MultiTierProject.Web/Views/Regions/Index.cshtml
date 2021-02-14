@@ -144,6 +144,8 @@
                     }
                 }
                 else {
+                    var oldValue = $(".update-region-" + id + "").attr("old-value");
+                    $(".update-region-" + id + "").val(oldValue);
                     alert("unexpected error.");
                 }
             }
