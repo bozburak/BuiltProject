@@ -67,7 +67,7 @@ namespace MultiTierProject.Service.Services
         public TEntity Update(TEntity entity)
         {
             var result = _repository.Update(entity);
-            _unitOfWork.CommitAsync();
+            _unitOfWork.Commit();
             return result;
         }
     }
