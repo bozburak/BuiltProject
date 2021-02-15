@@ -22,10 +22,10 @@
 
 <ul>
   <li>OOP - SOLID - Best Practices</li>
-  <li>.net core api</li>
+  <li>.net core api (restful api)</li>
   <li>.net core mvc</li>
   <li>Entity framework core</li>
-  <li>HttpClient (rest client)</li>
+  <li>HttpClient (restapi client)</li>
   <li>N layer architecture</li>
   <li>Generic Repository</li>
   <li>UnitOfWork</li>
