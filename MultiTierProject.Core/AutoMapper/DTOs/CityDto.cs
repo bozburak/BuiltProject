@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace MultiTierProject.API.AutoMapper.DTOs
+namespace MultiTierProject.Core.AutoMapper.DTOs
 {
     public class CityDto
     {

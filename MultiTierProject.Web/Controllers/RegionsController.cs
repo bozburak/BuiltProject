@@ -1,27 +1,22 @@
-﻿using AutoMapper;
-using Microsoft.AspNetCore.Mvc;
-using MultiTierProject.Core.Intefaceses.Services;
-using MultiTierProject.Core.Models;
-using MultiTierProject.Web.AutoMapper.DTOs;
-using MultiTierProject.Web.ClientServiceses;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
+using MultiTierProject.Core.AutoMapper.DTOs;
+using MultiTierProject.Integration.ClientServiceses.MultiTierProject;
 using MultiTierProject.Web.Filters;
 using Newtonsoft.Json;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace MultiTierProject.Web.Controllers
 {
     public class RegionsController : Controller
     {
-        private readonly IRegionService _regionService;
-        private readonly IMapper _mapper;
-        private readonly RegionClientService _apiClient;
+        private readonly ILogger<RegionsController> _logger;
+        private readonly RegionClientService<RegionDto> _apiClient;
 
-        public RegionsController(IRegionService regionService, IMapper mapper, RegionClientService apiClient)
+        public RegionsController(RegionClientService<RegionDto> apiClient, ILogger<RegionsController> logger)
         {
-            _regionService = regionService;
-            _mapper = mapper;
             _apiClient = apiClient;
+            _logger = logger;
         }
 
         [HttpGet]
@@ -29,6 +24,7 @@ namespace MultiTierProject.Web.Controllers
         {
             //var regions = await _regionService.GetAllAsync();
             var result = await _apiClient.GetAllAsync();
+            _logger.LogInformation("GetAll");
             return View(result);
         }
 
@@ -37,7 +33,9 @@ namespace MultiTierProject.Web.Controllers
         {
             //var newRegion = await _regionService.AddAsync(_mapper.Map<Region>(regionDto));
             var result = await _apiClient.AddAsync(regionDto);
-            return Json(JsonConvert.SerializeObject(result));
+            var resultJson = JsonConvert.SerializeObject(result);
+            _logger.LogInformation($"Added Region: {resultJson}" );
+            return Json(resultJson);
         }
 
         [HttpPut]
@@ -45,16 +43,18 @@ namespace MultiTierProject.Web.Controllers
         {
             //var updateRegion = _regionService.Update(_mapper.Map<Region>(regionDto));
             var result = _apiClient.Update(regionDto);
+            _logger.LogInformation($"Updated Region Name: {result?.Name}");
             return Json(result);
         }
-
-        [ServiceFilter(typeof(NotFoundFilter<Region>))]
+        
+        [ServiceFilter(typeof(NotFoundFilterForRegion))]
         [HttpDelete]
         public JsonResult Delete(int id)
         {
             //var region = _regionService.GetByIdAsync(id).Result;
             //_regionService.Remove(region);
             var result = _apiClient.Remove(id);
+            _logger.LogInformation($"is it removed region?: {result}");
             return Json(result);
         }
     }

@@ -1,5 +1,3 @@
-using System;
-
 namespace MultiTierProject.Web.Models
 {
     public class ErrorViewModel

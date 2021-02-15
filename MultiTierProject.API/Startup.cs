@@ -1,3 +1,4 @@
+using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -7,6 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using MultiTierProject.API.Extension;
 using MultiTierProject.API.Filters;
+using MultiTierProject.Core.AutoMapper.Mapping;
 using MultiTierProject.Core.Intefaceses.Repositories;
 using MultiTierProject.Core.Intefaceses.Services;
 using MultiTierProject.Core.Intefaceses.UnitOfWorks;
@@ -35,7 +37,6 @@ namespace MultiTierProject.API
                     o.MigrationsAssembly("MultiTierProject.Data");
                 });
             });
-            services.AddAutoMapper(typeof(Startup));
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
             services.AddScoped<IRegionRepository, RegionRepository>();
             services.AddScoped<ICityRepository, CityRepository>();
@@ -49,6 +50,16 @@ namespace MultiTierProject.API
             {
                 options.SuppressModelStateInvalidFilter = true;
             });
+
+            var mapperConfig = new MapperConfiguration(mc =>
+            {
+                mc.AddProfile(new MapProfile());
+            });
+
+            IMapper mapper = mapperConfig.CreateMapper();
+            services.AddSingleton(mapper);
+
+            services.AddMvc();
 
             services.AddControllers();
         }

@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Http;
-using MultiTierProject.API.AutoMapper.DTOs;
+using MultiTierProject.Core.AutoMapper.DTOs;
 using Newtonsoft.Json;
 
 namespace MultiTierProject.API.Extension
@@ -20,8 +20,10 @@ namespace MultiTierProject.API.Extension
 
                     if (ex != null)
                     {
-                        ErrorDto errorDto = new ErrorDto();
-                        errorDto.Status = 500;
+                        ErrorDto errorDto = new ErrorDto
+                        {
+                            Status = 500
+                        };
                         errorDto.Errors.Add(ex.Error.Message);
                         await context.Response.WriteAsync(JsonConvert.SerializeObject(errorDto));
                     }

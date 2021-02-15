@@ -1,7 +1,4 @@
 ﻿using MultiTierProject.Core.Intefaceses.UnitOfWorks;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace MultiTierProject.Data.UnitOfWorks

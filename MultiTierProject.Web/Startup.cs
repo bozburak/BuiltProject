@@ -1,19 +1,12 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using MultiTierProject.Core.AutoMapper.DTOs;
+using MultiTierProject.Integration.ClientServiceses.MultiTierProject;
 using MultiTierProject.Web.Filters;
-using MultiTierProject.Core.Intefaceses.Repositories;
-using MultiTierProject.Core.Intefaceses.Services;
-using MultiTierProject.Core.Intefaceses.UnitOfWorks;
-using MultiTierProject.Data;
-using MultiTierProject.Data.Repositories;
-using MultiTierProject.Data.UnitOfWorks;
-using MultiTierProject.Service.Services;
 using System;
-using MultiTierProject.Web.ClientServiceses;
 
 namespace MultiTierProject.Web
 {
@@ -29,25 +22,11 @@ namespace MultiTierProject.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<MultiTierDbContext>(options => {
-                options.UseSqlServer(Configuration["ConnectionStrings:SqlConStr"].ToString(), o =>
-                {
-                    o.MigrationsAssembly("MultiTierProject.Data");
-                });
-            });
-            services.AddAutoMapper(typeof(Startup));
-            services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
-            services.AddScoped<IRegionRepository, RegionRepository>();
-            services.AddScoped<ICityRepository, CityRepository>();
-            services.AddScoped(typeof(IService<>), typeof(Service.Services.Service<>));
-            services.AddScoped<IRegionService, RegionService>();
-            services.AddScoped<ICityService, CityService>();
-            services.AddScoped<IUnitOfWork, UnitOfWork>();
-            services.AddScoped(typeof(NotFoundFilter<>));
-            services.AddHttpClient<RegionClientService>(opt =>
+            services.AddHttpClient<RegionClientService<RegionDto>>(opt =>
             {
                 opt.BaseAddress = new Uri(Configuration["RequestUri"]);
             });
+            services.AddScoped<NotFoundFilterForRegion>();
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
         }
 
