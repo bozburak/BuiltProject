@@ -33,4 +33,10 @@
   <li>Filters</li>
   <li>Logger</li>
   <li>AutoMapper</li>
+  <li>HTML</li>
+  <li>CSS</li>
+  <li>Bootstrap</li>
+  <li>Javascript</li>
+  <li>Jquery</li>
+  <li>Ajax</li>
 </ul>
