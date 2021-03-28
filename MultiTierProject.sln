@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30907.101
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MultiTierProject.API", "MultiTierProject.API\MultiTierProject.API.csproj", "{250A56FE-3C0F-446D-9584-4D7A6C5D0AD0}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MultiTierProject.Core", "MultiTierProject.Core\MultiTierProject.Core.csproj", "{19B8BF73-410B-4AFC-AC71-9916612C31A0}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MultiTierProject.Data", "MultiTierProject.Data\MultiTierProject.Data.csproj", "{825DBEDB-FAA3-4684-993C-D79726A161FB}"
@@ -13,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MultiTierProject.Service", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MultiTierProject.Web", "MultiTierProject.Web\MultiTierProject.Web.csproj", "{8102E5EC-0687-48DB-A582-3300BFBDD699}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MultiTierProject.Integration", "MultiTierProject.Integration\MultiTierProject.Integration.csproj", "{9A8D3FDA-C6D0-4283-B75E-E60DA1B942E7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MultiTierProject.Integration", "MultiTierProject.Integration\MultiTierProject.Integration.csproj", "{9A8D3FDA-C6D0-4283-B75E-E60DA1B942E7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,10 +19,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{250A56FE-3C0F-446D-9584-4D7A6C5D0AD0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{250A56FE-3C0F-446D-9584-4D7A6C5D0AD0}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{250A56FE-3C0F-446D-9584-4D7A6C5D0AD0}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{250A56FE-3C0F-446D-9584-4D7A6C5D0AD0}.Release|Any CPU.Build.0 = Release|Any CPU
 		{19B8BF73-410B-4AFC-AC71-9916612C31A0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{19B8BF73-410B-4AFC-AC71-9916612C31A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{19B8BF73-410B-4AFC-AC71-9916612C31A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
