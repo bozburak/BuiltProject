@@ -10,12 +10,10 @@
   <li>Open PM</li>
   <li>Write add-migration initialize</li>
   <li>Write Update-database</li>
-  <h3>Start Only API</h3>
-    - change the startup project from the solution explorer (set as startup project API layer)
-  <h3>Start API and WEB (Client)</h3>
-   -change the startup project from the solution explorer (set as startup project WEB layer)
-   <br>
-   -start API project in debug mode
+ <li>
+ <h3>Start API and WEB (Client)</h3>
+ change the startup project from the solution explorer (set as startup project WEB layer)
+   </li>
 </ol>
 
 <h2>Used Technologies</h2>
