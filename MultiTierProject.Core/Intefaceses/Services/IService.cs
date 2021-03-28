@@ -12,8 +12,8 @@ namespace MultiTierProject.Core.Intefaceses.Services
         IEnumerable<TEntity> Where(Expression<Func<TEntity, bool>> predicate);
         Task<TEntity> AddAsync(TEntity entity);
         Task<IEnumerable<TEntity>> AddRangeAsync(IEnumerable<TEntity> entities);
-        void Remove(TEntity entity);
-        void RemoveRange(IEnumerable<TEntity> entity);
+        bool Remove(TEntity entity);
+        bool RemoveRange(IEnumerable<TEntity> entity);
         TEntity Update(TEntity entity);
     }
 }

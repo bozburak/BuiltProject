@@ -8,14 +8,8 @@ namespace MultiTierProject.Core.AutoMapper.Mapping
     {
         public MapProfile()
         {
-            CreateMap<Region, RegionDto>();
-            CreateMap<RegionDto, Region>();
-            CreateMap<CityDto, City>();
-            CreateMap<City, CityDto>();
-            CreateMap<Region, RegionWithCityDto>();
-            CreateMap<RegionWithCityDto, Region>();
-            CreateMap<City, CityWithRegionDto>();
-            CreateMap<CityWithRegionDto, City>();
+            CreateMap<Task, TaskDto>();
+            CreateMap<TaskDto, Task>();
         }
     }
 }

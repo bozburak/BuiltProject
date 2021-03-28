@@ -5,21 +5,21 @@ namespace MultiTierProject.Data.UnitOfWorks
 {
     public class UnitOfWork : IUnitOfWork
     {
-        private readonly MultiTierDbContext _multiTierDbContext1;
+        private readonly MultiTierDbContext _multiTierDbContext;
 
         public UnitOfWork(MultiTierDbContext multiTierDbContext)
         {
-            _multiTierDbContext1 = multiTierDbContext;
+            _multiTierDbContext = multiTierDbContext;
         }
 
         public void Commit()
         {
-            _multiTierDbContext1.SaveChanges();
+            _multiTierDbContext.SaveChanges();
         }
 
         public async Task CommitAsync()
         {
-            await _multiTierDbContext1.SaveChangesAsync();
+            await _multiTierDbContext.SaveChangesAsync();
         }
     }
 }

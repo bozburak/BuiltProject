@@ -52,16 +52,18 @@ namespace MultiTierProject.Service.Services
             return await _repository.GetByIdAsync(id);
         }
 
-        public void Remove(TEntity entity)
+        public bool Remove(TEntity entity)
         {
             _repository.Remove(entity);
             _unitOfWork.Commit();
+            return true;
         }
 
-        public void RemoveRange(IEnumerable<TEntity> entity)
+        public bool RemoveRange(IEnumerable<TEntity> entity)
         {
             _repository.RemoveRange(entity);
             _unitOfWork.Commit();
+            return true;
         }
 
         public TEntity Update(TEntity entity)

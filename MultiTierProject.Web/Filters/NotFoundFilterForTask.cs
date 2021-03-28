@@ -1,15 +1,15 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using MultiTierProject.Core.AutoMapper.DTOs;
-using MultiTierProject.Integration.ClientServiceses.MultiTierProject;
+using MultiTierProject.Core.Intefaceses.Services;
 using System.Linq;
 
 namespace MultiTierProject.Web.Filters
 {
-    public class NotFoundFilterForRegion : IActionFilter
+    public class NotFoundFilterForTask : IActionFilter
     {
-        private readonly RegionClientService<RegionDto> _service;
-        public NotFoundFilterForRegion(RegionClientService<RegionDto> service)
+        private readonly ITaskService _service;
+        public NotFoundFilterForTask(ITaskService service)
         {
             _service = service;
         }

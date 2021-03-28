@@ -38,11 +38,9 @@ namespace MultiTierProject.API
                 });
             });
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
-            services.AddScoped<IRegionRepository, RegionRepository>();
-            services.AddScoped<ICityRepository, CityRepository>();
+            services.AddScoped<ITaskRepository, TaskRepository>();
             services.AddScoped(typeof(IService<>), typeof(Service.Services.Service<>));
-            services.AddScoped<IRegionService, RegionService>();
-            services.AddScoped<ICityService, CityService>();
+            services.AddScoped<ITaskService, TaskService>();
             services.AddScoped<IUnitOfWork, UnitOfWork>(); 
             services.AddScoped(typeof(NotFoundFilter<>));
 

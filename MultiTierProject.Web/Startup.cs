@@ -1,10 +1,21 @@
+using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using MultiTierProject.Core.AutoMapper.DTOs;
+using MultiTierProject.Core.AutoMapper.Mapping;
+using MultiTierProject.Core.Intefaceses.Repositories;
+using MultiTierProject.Core.Intefaceses.Services;
+using MultiTierProject.Core.Intefaceses.UnitOfWorks;
+using MultiTierProject.Core.Models;
+using MultiTierProject.Data;
+using MultiTierProject.Data.Repositories;
+using MultiTierProject.Data.UnitOfWorks;
 using MultiTierProject.Integration.ClientServiceses.MultiTierProject;
+using MultiTierProject.Service.Services;
 using MultiTierProject.Web.Filters;
 using System;
 
@@ -22,11 +33,27 @@ namespace MultiTierProject.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddHttpClient<RegionClientService<RegionDto>>(opt =>
+            var mapperConfig = new MapperConfiguration(mc =>
             {
-                opt.BaseAddress = new Uri(Configuration["RequestUri"]);
+                mc.AddProfile(new MapProfile());
             });
-            services.AddScoped<NotFoundFilterForRegion>();
+
+            IMapper mapper = mapperConfig.CreateMapper();
+            services.AddSingleton(mapper);
+            services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+            services.AddScoped(typeof(ITaskRepository), typeof(TaskRepository));
+            services.AddScoped<ITaskService, TaskService>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddScoped<NotFoundFilterForTask>();
+
+            services.AddDbContext<MultiTierDbContext>(options =>
+            {
+                options.UseSqlServer(Configuration["ConnectionStrings:SqlConStr"].ToString(), o =>
+                {
+                    o.MigrationsAssembly("MultiTierProject.Data");
+                });
+            });
+
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
         }
 

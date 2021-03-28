@@ -14,6 +14,7 @@
   <ItemGroup>
     <ProjectReference Include="..\MultiTierProject.Core\MultiTierProject.Core.csproj" />
     <ProjectReference Include="..\MultiTierProject.Integration\MultiTierProject.Integration.csproj" />
+    <ProjectReference Include="..\MultiTierProject.Service\MultiTierProject.Service.csproj" />
   </ItemGroup>
 
 </Project>

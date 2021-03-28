@@ -8,15 +8,12 @@ namespace MultiTierProject.Data
     public class MultiTierDbContext : DbContext
     {
         public MultiTierDbContext(DbContextOptions<MultiTierDbContext> option) : base(option) {}
-        public DbSet<Region> Regions { get; set; }
-        public DbSet<City> Cities { get; set; }
+        public DbSet<Task> Tasks { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.ApplyConfiguration(new CityConfiguration());
-            modelBuilder.ApplyConfiguration(new RegionConfiguration());
+            modelBuilder.ApplyConfiguration(new TaskConfiguration());
 
-            modelBuilder.ApplyConfiguration(new CitySeed(new int[] { 1, 2, 3 }));
-            modelBuilder.ApplyConfiguration(new RegionSeed(new int[] { 1, 2, 3 }));
+            modelBuilder.ApplyConfiguration(new TaskSeed(new int[] { 1, 2, 3 }));
         }
     }
 }

@@ -1,33 +1,67 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using MultiTierProject.Web.Models;
-using System.Diagnostics;
+using MultiTierProject.Core.AutoMapper.DTOs;
+using MultiTierProject.Core.Intefaceses.Services;
+using MultiTierProject.Web.Filters;
+using Newtonsoft.Json;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace MultiTierProject.Web.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        //private readonly TaskClientService<TaskDto> _apiClient;
+        private readonly ITaskService _taskService;
+        private readonly IMapper _mapper;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ITaskService taskService, ILogger<HomeController> logger, IMapper mapper)
         {
+            _taskService = taskService;
             _logger = logger;
+            _mapper = mapper;
         }
 
-        public IActionResult Index()
+        [HttpGet]
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var tasks = await _taskService.GetAllAsync();
+            //var result = await _apiClient.GetAllAsync();
+            _logger.LogInformation("GetAll");
+            var x = _mapper.Map<IEnumerable<TaskDto>>(tasks);
+            return View(_mapper.Map<IEnumerable<TaskDto>>(tasks));
         }
 
-        public IActionResult Privacy()
+        [HttpPost]
+        public async Task<JsonResult> Create(TaskDto taskDto)
         {
-            return View();
+            var newTask = await _taskService.AddAsync(_mapper.Map<Core.Models.Task>(taskDto));
+            //var result = await _apiClient.AddAsync(taskDto);
+            var resultJson = JsonConvert.SerializeObject(_mapper.Map<TaskDto>(newTask));
+            _logger.LogInformation($"Added Task: {resultJson}");
+            return Json(resultJson);
         }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
+        [HttpPut]
+        public JsonResult Update(TaskDto taskDto)
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            //var updateTask = _apiClient.Update(_mapper.Map<Task>(taskDto));
+            var result = _taskService.Update(_mapper.Map<Core.Models.Task>(taskDto));
+            _logger.LogInformation($"Updated Task Name: {result?.Name}");
+            return Json(_mapper.Map<TaskDto>(result));
+        }
+
+        [ServiceFilter(typeof(NotFoundFilterForTask))]
+        [HttpDelete]
+        public JsonResult Delete(int id)
+        {
+            //var result = _apiClient.Remove(id);
+            var task = _taskService.GetByIdAsync(id).Result;
+            var result = _taskService.Remove(task);
+            _logger.LogInformation($"is it removed task?: {result}");
+            return Json(result);
         }
     }
 }
