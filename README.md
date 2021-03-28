@@ -5,7 +5,7 @@
 <ol>
   <li>Download project</li>
   <li>Create local db</li>
-  <li>Update connection string of WEB and API layer</li>
+  <li>Update connection string of WEB layer</li>
   <li><h3>Migration Process</h3>
   Open PM
     <br>
