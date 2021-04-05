@@ -47,7 +47,7 @@ namespace Service.Services
             return await _repository.GetAllAsync();
         }
 
-        public async Task<TEntity> GetByIdAsync(int id)
+        public async Task<TEntity> GetByIdAsync(long id)
         {
             return await _repository.GetByIdAsync(id);
         }

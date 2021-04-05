@@ -1,11 +1,16 @@
 ﻿using Core.Intefaceses.Repositories;
-using Core.Models;
+using Microsoft.EntityFrameworkCore;
+using System.Threading.Tasks;
 
 namespace Data.Repositories
 {
-    public class TaskRepository : Repository<Task>, ITaskRepository
+    public class TaskRepository : Repository<Core.Models.Task>, ITaskRepository
     {
-        private ProjectDbContext ProjectDbContext { get => _context as ProjectDbContext; }
+        private ProjectDbContext _projectDbContext { get => _context as ProjectDbContext; }
         public TaskRepository(ProjectDbContext dbContext) : base(dbContext) { }
+        public async Task<Core.Models.Task> GetTaskWithCategoryByIdAsync(long taskId)
+        {
+            return await _projectDbContext.Tasks.Include(x => x.Category).SingleOrDefaultAsync(x => x.Id == taskId);
+        }
     }
 }

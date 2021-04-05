@@ -10,11 +10,11 @@ namespace WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class HomeController : ControllerBase
+    public class TasksController : ControllerBase
     {
         private readonly ITaskService _taskService;
         private readonly IMapper _mapper;
-        public HomeController(ITaskService taskService, IMapper mapper)
+        public TasksController(ITaskService taskService, IMapper mapper)
         {
             _taskService = taskService;
             _mapper = mapper;

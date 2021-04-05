@@ -7,7 +7,7 @@ namespace Core.Intefaceses.Repositories
 {
     public interface IRepository<TEntity> where TEntity : class
     {
-        Task<TEntity> GetByIdAsync(int id);
+        Task<TEntity> GetByIdAsync(long id);
         Task<IEnumerable<TEntity>> GetAllAsync();
         IEnumerable<TEntity> Where(Expression<Func<TEntity, bool>> predicate);
         Task AddAsync(TEntity entity);

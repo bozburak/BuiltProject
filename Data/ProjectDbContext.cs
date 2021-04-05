@@ -9,11 +9,13 @@ namespace Data
     {
         public ProjectDbContext(DbContextOptions<ProjectDbContext> option) : base(option) {}
         public DbSet<Task> Tasks { get; set; }
+        public DbSet<Category> Categories { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new TaskConfiguration());
 
             modelBuilder.ApplyConfiguration(new TaskSeed(new int[] { 1, 2, 3 }));
+            modelBuilder.ApplyConfiguration(new CategorySeed(new int[] { 1, 2, 3 }));
         }
     }
 }

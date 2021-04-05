@@ -10,14 +10,14 @@ using System.Threading.Tasks;
 
 namespace Web.Controllers
 {
-    public class HomeController : Controller
+    public class TasksController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly ILogger<TasksController> _logger;
         //private readonly TaskClientService<TaskDto> _apiClient;
         private readonly ITaskService _taskService;
         private readonly IMapper _mapper;
 
-        public HomeController(ITaskService taskService, ILogger<HomeController> logger, IMapper mapper)
+        public TasksController(ITaskService taskService, ILogger<TasksController> logger, IMapper mapper)
         {
             _taskService = taskService;
             _logger = logger;
