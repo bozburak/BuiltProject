@@ -38,9 +38,11 @@ namespace WebAPI
                 });
             });
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
-            services.AddScoped<ITaskRepository, TaskRepository>();
             services.AddScoped(typeof(IService<>), typeof(Service.Services.Service<>));
+            services.AddScoped<ITaskRepository, TaskRepository>();
             services.AddScoped<ITaskService, TaskService>();
+            services.AddScoped<ICategoryRepository, CategoryRepository>();
+            services.AddScoped<ICategoryService, CategoryService>();
             services.AddScoped<IUnitOfWork, UnitOfWork>(); 
             services.AddScoped(typeof(NotFoundFilter<>));
 

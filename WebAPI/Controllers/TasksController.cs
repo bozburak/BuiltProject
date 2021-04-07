@@ -29,7 +29,7 @@ namespace WebAPI.Controllers
 
         [ServiceFilter(typeof(NotFoundFilter<Core.Models.Task>))]
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetById(int id)
+        public async Task<IActionResult> GetById(long id)
         {
             var task = await _taskService.GetByIdAsync(id);
             return Ok(_mapper.Map<TaskDto>(task));
@@ -37,7 +37,7 @@ namespace WebAPI.Controllers
 
         [ValidationFilter]
         [HttpPost]
-        public async Task<IActionResult> Save(TaskDto task)
+        public async Task<IActionResult> Add(TaskDto task)
         {
             var newTask = await _taskService.AddAsync(_mapper.Map<Core.Models.Task>(task));
             return Created(string.Empty, _mapper.Map<TaskDto>(newTask));
@@ -52,10 +52,18 @@ namespace WebAPI.Controllers
 
         [ServiceFilter(typeof(NotFoundFilter<Core.Models.Task>))]
         [HttpDelete("{id}")]
-        public IActionResult Delete(int id)
+        public IActionResult Delete(long id)
         {
             var task = _taskService.GetByIdAsync(id).Result;
             _taskService.Remove(task);
+            return Ok(_mapper.Map<TaskDto>(task));
+        }
+
+        [ServiceFilter(typeof(NotFoundFilter<Core.Models.Task>))]
+        [HttpGet("/TaskWithCategory/{id}")]
+        public IActionResult TaskWithCategory(long id)
+        {
+            var task = _taskService.GetTaskWithCategoryByIdAsync(id).Result;
             return Ok(_mapper.Map<TaskDto>(task));
         }
     }

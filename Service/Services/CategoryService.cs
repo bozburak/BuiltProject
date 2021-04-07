@@ -2,6 +2,7 @@
 using Core.Intefaceses.Services;
 using Core.Intefaceses.UnitOfWorks;
 using Core.Models;
+using System.Threading.Tasks;
 
 namespace Service.Services
 {
@@ -11,6 +12,10 @@ namespace Service.Services
         public CategoryService(IUnitOfWork unitOfWork, IRepository<Category> repository, ICategoryRepository categoryRepository) : base(unitOfWork, repository)
         {
             _categoryRepository = categoryRepository;
+        }
+        public async Task<Category> GetCategoryWithTasksByIdAsync(long categoryId)
+        {
+            return await _categoryRepository.GetCategoryWithTasksByIdAsync(categoryId);
         }
     }
 }

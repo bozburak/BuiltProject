@@ -10,6 +10,8 @@ namespace Core.AutoMapper.Mapping
         {
             CreateMap<Task, TaskDto>();
             CreateMap<TaskDto, Task>();
+            CreateMap<Category, CategoryDto>();
+            CreateMap<CategoryDto, Category>();
         }
     }
 }
