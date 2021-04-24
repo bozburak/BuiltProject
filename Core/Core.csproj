@@ -5,8 +5,21 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="CrossCuttingConcerns\Caching\**" />
+    <EmbeddedResource Remove="CrossCuttingConcerns\Caching\**" />
+    <None Remove="CrossCuttingConcerns\Caching\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AspectInjector" Version="2.4.0" />
     <PackageReference Include="AutoMapper" Version="10.1.1" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.1" />
+    <PackageReference Include="Microsoft.Extensions.Caching.Abstractions" Version="5.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="5.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="CrossCuttingConcerns\" />
   </ItemGroup>
 
 </Project>

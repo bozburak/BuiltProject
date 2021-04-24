@@ -1,4 +1,5 @@
-﻿using Core.Intefaceses.Repositories;
+﻿using Core.Aspects.AspectInjector.Validation;
+using Core.Intefaceses.Repositories;
 using Core.Intefaceses.Services;
 using Core.Intefaceses.UnitOfWorks;
 using System;
@@ -42,6 +43,7 @@ namespace Service.Services
             return _repository.Where(predicate);
         }
 
+        [LogAspect]
         public async Task<IEnumerable<TEntity>> GetAllAsync()
         {
             return await _repository.GetAllAsync();
