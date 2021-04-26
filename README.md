@@ -33,6 +33,7 @@
   <li>Filters</li>
   <li>Logging</li>
   <li>AutoMapper</li>
+  <li>FluentValidation</li>
   <li>HTML</li>
   <li>CSS</li>
   <li>Bootstrap</li>
