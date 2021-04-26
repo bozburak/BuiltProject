@@ -21,7 +21,7 @@
 <h2>Used Technologies</h2>
 
 <ul>
-  <li>OOP - SOLID - Best Practices</li>
+  <li>OOP - AOP - SOLID - Best Practices</li>
   <li>.net core api (restful api)</li>
   <li>.net core mvc</li>
   <li>Entity framework core</li>
@@ -31,7 +31,7 @@
   <li>UnitOfWork</li>
   <li>Global exception handler</li>
   <li>Filters</li>
-  <li>Logger</li>
+  <li>Logging</li>
   <li>AutoMapper</li>
   <li>HTML</li>
   <li>CSS</li>
