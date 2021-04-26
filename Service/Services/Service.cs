@@ -1,4 +1,5 @@
 ﻿using Core.Aspects.AspectInjector.Validation;
+using Core.Aspects.AspectInjector.Validation.Triggers;
 using Core.Intefaceses.Repositories;
 using Core.Intefaceses.Services;
 using Core.Intefaceses.UnitOfWorks;

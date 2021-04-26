@@ -1,4 +1,5 @@
-﻿using Core.Intefaceses.Repositories;
+﻿using Core.Aspects.AspectInjector.Validation.Triggers;
+using Core.Intefaceses.Repositories;
 using Core.Intefaceses.Services;
 using Core.Intefaceses.UnitOfWorks;
 using Core.Models;
@@ -16,6 +17,13 @@ namespace Service.Services
         public async Task<Core.Models.Task> GetTaskWithCategoryByIdAsync(long taskId)
         {
             return await _taskRepository.GetTaskWithCategoryByIdAsync(taskId);
+        }
+
+        [ValidationAttribute(typeof(ValidationRules.FluentValidation.TaskValidator))]
+        public async Task<Core.Models.Task> AddAsync(Core.Models.Task entity)
+        {
+            var x = base.AddAsync(entity);
+            return x.Result;
         }
     }
 }
