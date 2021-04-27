@@ -11,7 +11,7 @@ namespace Core.Aspects.AspectInjector.Validation
     public class ValidationAspect
     {
         [Advice(Kind.Before)]
-        public void Validate([Argument(Source.Triggers)] Attribute[] attributes, [Argument(Source.Arguments)] object[] arguments)
+        public void Handle([Argument(Source.Triggers)] Attribute[] attributes, [Argument(Source.Arguments)] object[] arguments)
         {
             foreach (var trigger in attributes.OfType<ValidationAttribute>())
             {

@@ -16,6 +16,8 @@ using WebAPI.Filters;
 using WebAPI.Extension;
 using Core.Intefaceses.Repositories;
 using Core.AutoMapper.Mapping;
+using Core.CrossCuttingConcerns;
+using Core.CrossCuttingConcerns.Caching.Microsoft;
 
 namespace WebAPI
 {
@@ -60,6 +62,10 @@ namespace WebAPI
             services.AddSingleton(mapper);
 
             services.AddMvc();
+
+            services.AddMemoryCache();
+            services.AddSingleton<ICacheManager, MemoryCacheManager>();
+
 
             services.AddControllers();
         }
