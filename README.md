@@ -32,6 +32,7 @@
   <li>Global exception handler</li>
   <li>Filters</li>
   <li>Logging</li>
+  <li>Caching</li>
   <li>AutoMapper</li>
   <li>FluentValidation</li>
   <li>HTML</li>
