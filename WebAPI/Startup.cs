@@ -18,6 +18,7 @@ using Core.Intefaceses.Repositories;
 using Core.AutoMapper.Mapping;
 using Core.CrossCuttingConcerns;
 using Core.CrossCuttingConcerns.Caching.Microsoft;
+using Core.DependencyInjection;
 
 namespace WebAPI
 {
@@ -63,11 +64,9 @@ namespace WebAPI
 
             services.AddMvc();
 
-            services.AddMemoryCache();
-            services.AddSingleton<ICacheManager, MemoryCacheManager>();
-
-
             services.AddControllers();
+
+            services.AddDependencyResolvers();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -1,7 +1,6 @@
 ﻿using AspectInjector.Broker;
 using Core.Aspects.AspectInjector.Caching.Triggers;
 using Core.CrossCuttingConcerns;
-using Core.CrossCuttingConcerns.Caching.Microsoft;
 using System;
 using System.Linq;
 
@@ -10,6 +9,7 @@ namespace Core.Aspects.AspectInjector.Caching
     [Aspect(Scope.Global)]
     public class CacheAspect
     {
+
         [Advice(Kind.Around)]
         public object Handle([Argument(Source.Triggers)] Attribute[] attributes, [Argument(Source.Arguments)] object[] arguments, [Argument(Source.Target)] Func<object[], object> method)
         {
