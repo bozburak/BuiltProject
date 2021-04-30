@@ -24,17 +24,15 @@ namespace Service.Services
         }
 
         [CacheAttribute("GetAllAsync")]
-        public async Task<IEnumerable<Core.Models.Task>> GetAllAsync()
+        public new async Task<IEnumerable<Core.Models.Task>> GetAllAsync()
         {
-            var x = base.GetAllAsync();
-            return x.Result;
+            return await base.GetAllAsync();
         }
 
         [ValidationAttribute(typeof(ValidationRules.FluentValidation.TaskValidator))]
-        public async Task<Core.Models.Task> AddAsync(Core.Models.Task entity)
+        public new async Task<Core.Models.Task> AddAsync(Core.Models.Task entity)
         {
-            var x = base.AddAsync(entity);
-            return x.Result;
+            return await base.AddAsync(entity);
         }
     }
 }
