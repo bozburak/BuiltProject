@@ -5,15 +5,15 @@ using System.Threading.Tasks;
 
 namespace Core.Intefaceses.Services
 {
-    public interface IService<TEntity> where TEntity:class
+    public interface IService<TEntity, TDto> where TEntity : class where TDto : class
     {
-        Task<TEntity> GetByIdAsync(long id);
-        Task<IEnumerable<TEntity>> GetAllAsync();
-        IEnumerable<TEntity> Where(Expression<Func<TEntity, bool>> predicate);
-        Task<TEntity> AddAsync(TEntity entity);
-        Task<IEnumerable<TEntity>> AddRangeAsync(IEnumerable<TEntity> entities);
-        bool Remove(TEntity entity);
-        bool RemoveRange(IEnumerable<TEntity> entity);
-        TEntity Update(TEntity entity);
+        Task<TDto> GetByIdAsync(string id);
+        Task<IEnumerable<TDto>> GetAllAsync();
+        IEnumerable<TDto> Where(Expression<Func<TEntity, bool>> predicate);
+        Task<TDto> AddAsync(TDto entity);
+        Task<IEnumerable<TDto>> AddRangeAsync(IEnumerable<TDto> entities);
+        bool Remove(string id);
+        bool RemoveRange(IEnumerable<string> id);
+        void Update(TDto entity);
     }
 }

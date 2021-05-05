@@ -1,10 +1,11 @@
-﻿using Core.Models;
+﻿using Core.AutoMapper.DTOs;
+using Core.Models;
 using System.Threading.Tasks;
 
 namespace Core.Intefaceses.Services
 {
-    public interface ICategoryService : IService<Category>
+    public interface ICategoryService : IService<Category, CategoryDto>
     {
-        Task<Category> GetCategoryWithTasksByIdAsync(long categoryId);
+        Task<CategoryDto> GetCategoryWithTasksByIdAsync(string categoryId);
     }
 }

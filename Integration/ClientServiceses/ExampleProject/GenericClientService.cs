@@ -1,8 +1,8 @@
 ﻿using Core.Intefaceses.Integration;
-using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace Integration.ClientServiceses.ExampleProject
@@ -25,7 +25,7 @@ namespace Integration.ClientServiceses.ExampleProject
 
             if (response.IsSuccessStatusCode)
             {
-                regionDtos = JsonConvert.DeserializeObject<IEnumerable<TEntity>>(await response.Content.ReadAsStringAsync());
+                regionDtos = JsonSerializer.Deserialize<IEnumerable<TEntity>>(await response.Content.ReadAsStringAsync());
             }
             else
             {
@@ -42,7 +42,7 @@ namespace Integration.ClientServiceses.ExampleProject
 
             if (response.IsSuccessStatusCode)
             {
-                regionDto = JsonConvert.DeserializeObject<TEntity>(await response.Content.ReadAsStringAsync());
+                regionDto = JsonSerializer.Deserialize<TEntity>(await response.Content.ReadAsStringAsync());
             }
             else
             {
@@ -53,12 +53,12 @@ namespace Integration.ClientServiceses.ExampleProject
 
         public async Task<TEntity> AddAsync(TEntity regionDto)
         {
-            var request = new StringContent(JsonConvert.SerializeObject(regionDto), Encoding.UTF8, "application/json"); 
+            var request = new StringContent(JsonSerializer.Serialize(regionDto), Encoding.UTF8, "application/json"); 
             var response = await _httpClient.PostAsync(_endPoint, request);
 
             if (response.IsSuccessStatusCode)
             {
-                regionDto = JsonConvert.DeserializeObject<TEntity>(await response.Content.ReadAsStringAsync());
+                regionDto = JsonSerializer.Deserialize<TEntity>(await response.Content.ReadAsStringAsync());
             }
             else
             {
@@ -69,12 +69,12 @@ namespace Integration.ClientServiceses.ExampleProject
 
         public TEntity Update(TEntity regionDto)
         {
-            var request = new StringContent(JsonConvert.SerializeObject(regionDto), Encoding.UTF8, "application/json");
+            var request = new StringContent(JsonSerializer.Serialize(regionDto), Encoding.UTF8, "application/json");
             var response =  _httpClient.PutAsync(_endPoint, request).Result;
 
             if (response.IsSuccessStatusCode)
             {
-                regionDto = JsonConvert.DeserializeObject<TEntity>(response.Content.ReadAsStringAsync().Result);
+                regionDto = JsonSerializer.Deserialize<TEntity>(response.Content.ReadAsStringAsync().Result);
             }
             else
             {

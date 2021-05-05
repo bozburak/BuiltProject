@@ -27,41 +27,40 @@ namespace WebAPI.Controllers
             return Ok(_mapper.Map<IEnumerable<TaskDto>>(tasks));
         }
 
-        [ServiceFilter(typeof(NotFoundFilter<Core.Models.Task>))]
+        [ServiceFilter(typeof(NotFoundFilter<Task, TaskDto>))]
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetById(long id)
+        public async Task<IActionResult> GetById(string id)
         {
             var task = await _taskService.GetByIdAsync(id);
-            return Ok(_mapper.Map<TaskDto>(task));
+            return Ok(task);
         }
 
         [ValidationFilter]
         [HttpPost]
         public async Task<IActionResult> Add(TaskDto task)
         {
-            var newTask = await _taskService.AddAsync(_mapper.Map<Core.Models.Task>(task));
-            return Created(string.Empty, _mapper.Map<TaskDto>(newTask));
+            var newTask = await _taskService.AddAsync(task);
+            return Created(string.Empty, newTask);
         }
 
         [HttpPut]
         public IActionResult Update(TaskDto task)
         {
-            var updateTask = _taskService.Update(_mapper.Map<Core.Models.Task>(task));
-            return Ok(_mapper.Map<TaskDto>(task));
+            _taskService.Update(task);
+            return NoContent();
         }
 
-        [ServiceFilter(typeof(NotFoundFilter<Core.Models.Task>))]
+        [ServiceFilter(typeof(NotFoundFilter<Core.Models.Task, TaskDto>))]
         [HttpDelete("{id}")]
-        public IActionResult Delete(long id)
+        public IActionResult Delete(string id)
         {
-            var task = _taskService.GetByIdAsync(id).Result;
-            _taskService.Remove(task);
-            return Ok(_mapper.Map<TaskDto>(task));
+            _taskService.Remove(id);
+            return NoContent();
         }
 
-        [ServiceFilter(typeof(NotFoundFilter<Core.Models.Task>))]
+        [ServiceFilter(typeof(NotFoundFilter<Core.Models.Task, TaskDto>))]
         [HttpGet("/TaskWithCategory/{id}")]
-        public IActionResult TaskWithCategory(long id)
+        public IActionResult TaskWithCategory(string id)
         {
             var task = _taskService.GetTaskWithCategoryByIdAsync(id).Result;
             return Ok(_mapper.Map<TaskDto>(task));

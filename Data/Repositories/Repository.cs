@@ -38,7 +38,7 @@ namespace Data.Repositories
             return await _dbSet.ToListAsync();
         }
 
-        public async Task<TEntity> GetByIdAsync(long id)
+        public async Task<TEntity> GetByIdAsync(string id)
         {
             return await _dbSet.FindAsync(id);
         }
@@ -53,10 +53,9 @@ namespace Data.Repositories
             _dbSet.RemoveRange(entities);
         }
 
-        public TEntity Update(TEntity entity)
+        public void Update(TEntity entity)
         {
             _context.Entry(entity).State = EntityState.Modified;
-            return entity;
         }
     }
 }

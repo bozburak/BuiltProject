@@ -20,7 +20,7 @@ namespace Web.Filters
 
         public void OnActionExecuting(ActionExecutingContext context)
         {
-            var id = (int)context.ActionArguments.Values.FirstOrDefault();
+            var id = (string)context.ActionArguments.Values.FirstOrDefault();
             var entity = _service.GetByIdAsync(id).Result;
             if (entity == null)
             {

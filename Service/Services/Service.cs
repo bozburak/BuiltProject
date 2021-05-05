@@ -7,10 +7,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
+using Core.AutoMapper;
+using System.Linq;
 
 namespace Service.Services
 {
-    public class Service<TEntity> : IService<TEntity> where TEntity : class
+    public class Service<TEntity, TDto> : IService<TEntity, TDto> where TEntity : class where TDto : class
     {
         public readonly IUnitOfWork _unitOfWork;
         private readonly IRepository<TEntity> _repository;
@@ -21,59 +23,71 @@ namespace Service.Services
             _repository = repository;
         }
 
-        public async Task<TEntity> AddAsync(TEntity entity)
+        public async Task<TDto> AddAsync(TDto entity)
         {
-            await _repository.AddAsync(entity);
+            await _repository.AddAsync(ObjectMapper.Mapper.Map<TEntity>(entity));
 
             await _unitOfWork.CommitAsync();
 
             return entity;
         }
 
-        public async Task<IEnumerable<TEntity>> AddRangeAsync(IEnumerable<TEntity> entities)
+        public async Task<IEnumerable<TDto>> AddRangeAsync(IEnumerable<TDto> entities)
         {
-            await _repository.AddRangeAsync(entities);
+            await _repository.AddRangeAsync(ObjectMapper.Mapper.Map<IEnumerable<TEntity>>(entities));
 
             await _unitOfWork.CommitAsync();
 
             return entities;
         }
 
-        public IEnumerable<TEntity> Where(Expression<Func<TEntity, bool>> predicate)
+        public IEnumerable<TDto> Where(Expression<Func<TEntity, bool>> predicate)
         {
-            return _repository.Where(predicate);
+            var result = _repository.Where(predicate);
+            return ObjectMapper.Mapper.Map<IEnumerable<TDto>>(result);
         }
 
         [LogAspect]
-        public async Task<IEnumerable<TEntity>> GetAllAsync()
+        public async Task<IEnumerable<TDto>> GetAllAsync()
         {
-            return await _repository.GetAllAsync();
+            var result = await _repository.GetAllAsync();
+            return ObjectMapper.Mapper.Map<IEnumerable<TDto>>(result);
         }
 
-        public async Task<TEntity> GetByIdAsync(long id)
+        public async Task<TDto> GetByIdAsync(string id)
         {
-            return await _repository.GetByIdAsync(id);
+            var result = await _repository.GetByIdAsync(id);
+            return ObjectMapper.Mapper.Map<TDto>(result);
         }
 
-        public bool Remove(TEntity entity)
+        public bool Remove(string id)
         {
-            _repository.Remove(entity);
+            var isExist  = _repository.GetByIdAsync(id).Result;
+
+            _repository.Remove(isExist);
+
+            _unitOfWork.Commit();
+
+            return true;
+        }
+
+        public bool RemoveRange(IEnumerable<string> ids)
+        {
+            List<TEntity> entities = new List<TEntity>();
+            foreach (var id in ids)
+            {
+                var isExist = _repository.GetByIdAsync(id).Result;
+                entities.Add(isExist);
+            }
+            _repository.RemoveRange(entities);
             _unitOfWork.Commit();
             return true;
         }
 
-        public bool RemoveRange(IEnumerable<TEntity> entity)
+        public void Update(TDto entity)
         {
-            _repository.RemoveRange(entity);
+            _repository.Update(ObjectMapper.Mapper.Map<TEntity>(entity));
             _unitOfWork.Commit();
-            return true;
-        }
-
-        public TEntity Update(TEntity entity)
-        {
-            var result = _repository.Update(entity);
-            _unitOfWork.Commit();
-            return result;
         }
     }
 }

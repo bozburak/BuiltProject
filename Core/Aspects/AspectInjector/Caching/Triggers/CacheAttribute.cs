@@ -1,7 +1,7 @@
 ﻿using AspectInjector.Broker;
 using Core.CrossCuttingConcerns;
 using Microsoft.Extensions.DependencyInjection;
-using Core.DependencyInjection;
+using Core.Extensions;
 using System;
 
 namespace Core.Aspects.AspectInjector.Caching.Triggers
@@ -17,7 +17,7 @@ namespace Core.Aspects.AspectInjector.Caching.Triggers
         {
             _key = key;
             _duration = duration;
-            _cacheManager = ServiceTool.ServiceProvider.GetService<ICacheManager>();
+            _cacheManager = CustomServiceCollection.ServiceProvider.GetService<ICacheManager>();
         }
     }
 }

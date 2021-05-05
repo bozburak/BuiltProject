@@ -6,10 +6,10 @@ using System.Linq;
 
 namespace WebAPI.Filters
 {
-    public class NotFoundFilter<TEntity> : IActionFilter where TEntity : class
+    public class NotFoundFilter<TEntity, TDto> : IActionFilter where TEntity : class where TDto : class
     {
-        private readonly IService<TEntity> _service;
-        public NotFoundFilter(IService<TEntity> service)
+        private readonly IService<TEntity, TDto> _service;
+        public NotFoundFilter(IService<TEntity, TDto> service)
         {
             _service = service;
         }
@@ -20,7 +20,7 @@ namespace WebAPI.Filters
 
         public void OnActionExecuting(ActionExecutingContext context)
         {
-            var id = (int)context.ActionArguments.Values.FirstOrDefault();
+            var id = (string)context.ActionArguments.Values.FirstOrDefault();
             var entity = _service.GetByIdAsync(id).Result;
             if (entity == null)
             {

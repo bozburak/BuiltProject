@@ -14,58 +14,55 @@ namespace WebAPI.Controllers
     public class CategoriesController : ControllerBase
     {
         private readonly ICategoryService _categoryService;
-        private readonly IMapper _mapper;
-        public CategoriesController(ICategoryService categoryService, IMapper mapper)
+        public CategoriesController(ICategoryService categoryService)
         {
             _categoryService = categoryService;
-            _mapper = mapper;
         }
 
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
             var categories = await _categoryService.GetAllAsync();
-            return Ok(_mapper.Map<IEnumerable<CategoryDto>>(categories));
+            return Ok(categories);
         }
 
-        [ServiceFilter(typeof(NotFoundFilter<Category>))]
+        [ServiceFilter(typeof(NotFoundFilter<Category, CategoryDto>))]
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetById(long id)
+        public async Task<IActionResult> GetById(string id)
         {
             var category = await _categoryService.GetByIdAsync(id);
-            return Ok(_mapper.Map<CategoryDto>(category));
+            return Ok(category);
         }
 
         [ValidationFilter]
         [HttpPost]
         public async Task<IActionResult> Add(CategoryDto category)
         {
-            var newCategory = await _categoryService.AddAsync(_mapper.Map<Category>(category));
-            return Created(string.Empty, _mapper.Map<CategoryDto>(newCategory));
+            var newCategory = await _categoryService.AddAsync(category);
+            return Created(string.Empty, newCategory);
         }
 
         [HttpPut]
         public IActionResult Update(CategoryDto category)
         {
-            var updateTask = _categoryService.Update(_mapper.Map<Category>(category));
-            return Ok(_mapper.Map<CategoryDto>(category));
+            _categoryService.Update(category);
+            return NoContent();
         }
 
-        [ServiceFilter(typeof(NotFoundFilter<Category>))]
+        [ServiceFilter(typeof(NotFoundFilter<Category, CategoryDto>))]
         [HttpDelete("{id}")]
-        public IActionResult Delete(long id)
+        public IActionResult Delete(string id)
         {
-            var category = _categoryService.GetByIdAsync(id).Result;
-            _categoryService.Remove(category);
-            return Ok(_mapper.Map<CategoryDto>(category));
+            _categoryService.Remove(id);
+            return NoContent();
         }
 
-        [ServiceFilter(typeof(NotFoundFilter<Category>))]
+        [ServiceFilter(typeof(NotFoundFilter<Category, CategoryDto>))]
         [HttpGet("/CategoryWithTasks/{id}")]
-        public IActionResult CategoryWithTasks(long id)
+        public IActionResult CategoryWithTasks(string id)
         {
             var category = _categoryService.GetCategoryWithTasksByIdAsync(id).Result;
-            return Ok(_mapper.Map<CategoryDto>(category));
+            return Ok(category);
         }
     }
 }

@@ -1,10 +1,10 @@
-﻿using Core.Models;
+﻿using Core.AutoMapper.DTOs;
 using System.Threading.Tasks;
 
 namespace Core.Intefaceses.Services
 {
-    public interface ITaskService : IService<Core.Models.Task>
+    public interface ITaskService : IService<Core.Models.Task, TaskDto>
     {
-        Task<Core.Models.Task> GetTaskWithCategoryByIdAsync(long taskId);
+        Task<TaskDto> GetTaskWithCategoryByIdAsync(string taskId);
     }
 }

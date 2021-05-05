@@ -1,4 +1,6 @@
-﻿using Core.Intefaceses.Repositories;
+﻿using Core.AutoMapper;
+using Core.AutoMapper.DTOs;
+using Core.Intefaceses.Repositories;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
 
@@ -8,9 +10,10 @@ namespace Data.Repositories
     {
         private ProjectDbContext _projectDbContext { get => _context as ProjectDbContext; }
         public TaskRepository(ProjectDbContext dbContext) : base(dbContext) { }
-        public async Task<Core.Models.Task> GetTaskWithCategoryByIdAsync(long taskId)
+        public async Task<TaskDto> GetTaskWithCategoryByIdAsync(string taskId)
         {
-            return await _projectDbContext.Tasks.Include(x => x.Category).SingleOrDefaultAsync(x => x.Id == taskId);
+            var result = await _projectDbContext.Tasks.Include(x => x.Category).SingleOrDefaultAsync(x => x.Id == taskId);
+            return ObjectMapper.Mapper.Map<TaskDto>(result);
         }
     }
 }

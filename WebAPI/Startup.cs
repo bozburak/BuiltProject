@@ -13,12 +13,9 @@ using Data.Repositories;
 using Data.UnitOfWorks;
 using Service.Services;
 using WebAPI.Filters;
-using WebAPI.Extension;
+using Core.Extensions;
 using Core.Intefaceses.Repositories;
 using Core.AutoMapper.Mapping;
-using Core.CrossCuttingConcerns;
-using Core.CrossCuttingConcerns.Caching.Microsoft;
-using Core.DependencyInjection;
 
 namespace WebAPI
 {
@@ -41,13 +38,13 @@ namespace WebAPI
                 });
             });
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
-            services.AddScoped(typeof(IService<>), typeof(Service.Services.Service<>));
+            services.AddScoped(typeof(IService<,>), typeof(Service.Services.Service<,>));
             services.AddScoped<ITaskRepository, TaskRepository>();
             services.AddScoped<ITaskService, TaskService>();
             services.AddScoped<ICategoryRepository, CategoryRepository>();
             services.AddScoped<ICategoryService, CategoryService>();
             services.AddScoped<IUnitOfWork, UnitOfWork>(); 
-            services.AddScoped(typeof(NotFoundFilter<>));
+            services.AddScoped(typeof(NotFoundFilter<,>));
 
             services.Configure<ApiBehaviorOptions>(options =>
             {
@@ -58,9 +55,7 @@ namespace WebAPI
             {
                 mc.AddProfile(new MapProfile());
             });
-
             IMapper mapper = mapperConfig.CreateMapper();
-            services.AddSingleton(mapper);
 
             services.AddMvc();
 
@@ -76,8 +71,12 @@ namespace WebAPI
             {
                 app.UseDeveloperExceptionPage();
             }
+            else
+            {
+                //app.UseCustomException();
+            }
 
-            app.UseCustomExceptio();
+            app.CustomException();
 
             app.UseHttpsRedirection();
 

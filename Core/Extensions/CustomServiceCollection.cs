@@ -1,17 +1,19 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Core.CrossCuttingConcerns;
 using Core.CrossCuttingConcerns.Caching.Microsoft;
+using System;
 
-namespace Core.DependencyInjection
+namespace Core.Extensions
 {
     public static class CustomServiceCollection
     {
-        public static IServiceCollection AddDependencyResolvers (this IServiceCollection services)
+        public static IServiceProvider ServiceProvider { get; private set; }
+
+        public static void AddDependencyResolvers (this IServiceCollection services)
         {
             services.AddMemoryCache();
             services.AddSingleton<ICacheManager, MemoryCacheManager>();
-
-            return ServiceTool.Create(services);
+            ServiceProvider = services.BuildServiceProvider();
         }
     }
 }

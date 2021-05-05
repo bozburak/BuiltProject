@@ -14,8 +14,8 @@ namespace Data
         {
             modelBuilder.ApplyConfiguration(new TaskConfiguration());
 
-            modelBuilder.ApplyConfiguration(new TaskSeed(new int[] { 1, 2, 3 }));
-            modelBuilder.ApplyConfiguration(new CategorySeed(new int[] { 1, 2, 3 }));
+            modelBuilder.ApplyConfiguration(new TaskSeed(new string[] { "1", "2", "3" }));
+            modelBuilder.ApplyConfiguration(new CategorySeed(new string[] { "1", "2", "3" }));
         }
     }
 }
