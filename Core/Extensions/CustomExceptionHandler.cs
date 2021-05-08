@@ -1,9 +1,8 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
-using Core.AutoMapper.DTOs;
 using Microsoft.AspNetCore.Diagnostics;
-using System.Collections.Generic;
 using System.Text.Json;
+using Core.Utilities.DTOs;
 
 namespace Core.Extensions
 {
@@ -21,12 +20,8 @@ namespace Core.Extensions
 
                     if (ex != null)
                     {
-                        ErrorDto errorDto = new ErrorDto
-                        {
-                            Status = 500,
-                            Errors = new List<string>() { ex.Error.Message }
-                        };
-                        await context.Response.WriteAsync(JsonSerializer.Serialize(errorDto));
+                        var response = Response<NoContent>.Fail(ex.Error.Message, 500);
+                        await context.Response.WriteAsync(JsonSerializer.Serialize(response));
                     }
                 });
             });

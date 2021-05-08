@@ -9,6 +9,7 @@ using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Core.AutoMapper;
 using System.Linq;
+using Core.Utilities.DTOs;
 
 namespace Service.Services
 {
@@ -23,44 +24,44 @@ namespace Service.Services
             _repository = repository;
         }
 
-        public async Task<TDto> AddAsync(TDto entity)
+        public async Task<Response<TDto>> AddAsync(TDto entity)
         {
             await _repository.AddAsync(ObjectMapper.Mapper.Map<TEntity>(entity));
 
             await _unitOfWork.CommitAsync();
 
-            return entity;
+            return Response<TDto>.Success(entity, 200);
         }
 
-        public async Task<IEnumerable<TDto>> AddRangeAsync(IEnumerable<TDto> entities)
+        public async Task<Response<IEnumerable<TDto>>> AddRangeAsync(IEnumerable<TDto> entities)
         {
             await _repository.AddRangeAsync(ObjectMapper.Mapper.Map<IEnumerable<TEntity>>(entities));
 
             await _unitOfWork.CommitAsync();
 
-            return entities;
+            return Response<IEnumerable<TDto>>.Success(entities, 200);
         }
 
-        public IEnumerable<TDto> Where(Expression<Func<TEntity, bool>> predicate)
+        public Response<IEnumerable<TDto>> Where(Expression<Func<TEntity, bool>> predicate)
         {
             var result = _repository.Where(predicate);
-            return ObjectMapper.Mapper.Map<IEnumerable<TDto>>(result);
+            return Response<IEnumerable<TDto>>.Success(ObjectMapper.Mapper.Map<IEnumerable<TDto>>(result), 200);
         }
 
         [LogAspect]
-        public async Task<IEnumerable<TDto>> GetAllAsync()
+        public async Task<Response<IEnumerable<TDto>>> GetAllAsync()
         {
             var result = await _repository.GetAllAsync();
-            return ObjectMapper.Mapper.Map<IEnumerable<TDto>>(result);
+            return Response<IEnumerable<TDto>>.Success(ObjectMapper.Mapper.Map<IEnumerable<TDto>>(result), 200);
         }
 
-        public async Task<TDto> GetByIdAsync(string id)
+        public async Task<Response<TDto>> GetByIdAsync(string id)
         {
             var result = await _repository.GetByIdAsync(id);
-            return ObjectMapper.Mapper.Map<TDto>(result);
+            return Response<TDto>.Success(ObjectMapper.Mapper.Map<TDto>(result), 200);
         }
 
-        public bool Remove(string id)
+        public Response<NoContent> Remove(string id)
         {
             var isExist  = _repository.GetByIdAsync(id).Result;
 
@@ -68,10 +69,10 @@ namespace Service.Services
 
             _unitOfWork.Commit();
 
-            return true;
+            return Response<NoContent>.Success(204);
         }
 
-        public bool RemoveRange(IEnumerable<string> ids)
+        public Response<NoContent> RemoveRange(IEnumerable<string> ids)
         {
             List<TEntity> entities = new List<TEntity>();
             foreach (var id in ids)
@@ -81,13 +82,14 @@ namespace Service.Services
             }
             _repository.RemoveRange(entities);
             _unitOfWork.Commit();
-            return true;
+            return Response<NoContent>.Success(204);
         }
 
-        public void Update(TDto entity)
+        public Response<NoContent> Update(TDto entity)
         {
             _repository.Update(ObjectMapper.Mapper.Map<TEntity>(entity));
             _unitOfWork.Commit();
+            return Response<NoContent>.Success(204);
         }
     }
 }

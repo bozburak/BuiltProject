@@ -17,9 +17,9 @@ namespace Data.Seeds
         {
             builder.HasData
             (
-                new Task { Id = "1", Name = "First Category", Status = true },
-                new Task { Id = "2", Name = "Second Category", Status = true },
-                new Task { Id = "3", Name = "Third Category", Status = true }
+                new Task { Id = 1, Name = "First Category", Status = true },
+                new Task { Id = 2, Name = "Second Category", Status = true },
+                new Task { Id = 3, Name = "Third Category", Status = true }
             );
         }
     }

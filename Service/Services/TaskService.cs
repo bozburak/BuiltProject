@@ -4,6 +4,7 @@ using Core.AutoMapper.DTOs;
 using Core.Intefaceses.Repositories;
 using Core.Intefaceses.Services;
 using Core.Intefaceses.UnitOfWorks;
+using Core.Utilities.DTOs;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -16,19 +17,20 @@ namespace Service.Services
         {
             _taskRepository = taskRepository;
         }
-        public async Task<TaskDto> GetTaskWithCategoryByIdAsync(string taskId)
+        public async Task<Response<TaskDto>> GetTaskWithCategoryByIdAsync(long taskId)
         {
-            return await _taskRepository.GetTaskWithCategoryByIdAsync(taskId);
+            var result = await _taskRepository.GetTaskWithCategoryByIdAsync(taskId);
+            return Response<TaskDto>.Success(result, 200);
         }
 
         [CacheAttribute("GetAllAsync")]
-        public new async Task<IEnumerable<TaskDto>> GetAllAsync()
+        public new async Task<Response<IEnumerable<TaskDto>>> GetAllAsync()
         {
             return await base.GetAllAsync();
         }
 
         [ValidationAttribute(typeof(ValidationRules.FluentValidation.TaskValidator))]
-        public new async Task<TaskDto> AddAsync(TaskDto entity)
+        public new async Task<Response<TaskDto>> AddAsync(TaskDto entity)
         {
             return await base.AddAsync(entity);
         }

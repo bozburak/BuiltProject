@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Core.AutoMapper.DTOs;
 using Core.Intefaceses.Services;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using WebAPI.Filters;
 
@@ -13,18 +12,16 @@ namespace WebAPI.Controllers
     public class TasksController : ControllerBase
     {
         private readonly ITaskService _taskService;
-        private readonly IMapper _mapper;
-        public TasksController(ITaskService taskService, IMapper mapper)
+        public TasksController(ITaskService taskService)
         {
             _taskService = taskService;
-            _mapper = mapper;
         }
 
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
             var tasks = await _taskService.GetAllAsync();
-            return Ok(_mapper.Map<IEnumerable<TaskDto>>(tasks));
+            return Ok(tasks);
         }
 
         [ServiceFilter(typeof(NotFoundFilter<Task, TaskDto>))]
@@ -60,10 +57,10 @@ namespace WebAPI.Controllers
 
         [ServiceFilter(typeof(NotFoundFilter<Core.Models.Task, TaskDto>))]
         [HttpGet("/TaskWithCategory/{id}")]
-        public IActionResult TaskWithCategory(string id)
+        public IActionResult TaskWithCategory(long id)
         {
             var task = _taskService.GetTaskWithCategoryByIdAsync(id).Result;
-            return Ok(_mapper.Map<TaskDto>(task));
+            return Ok(task);
         }
     }
 }

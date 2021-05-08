@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc.Filters;
 using Core.AutoMapper.DTOs;
 using Core.Intefaceses.Services;
 using System.Linq;
+using Core.Utilities.DTOs;
 
 namespace Web.Filters
 {
@@ -24,9 +25,8 @@ namespace Web.Filters
             var entity = _service.GetByIdAsync(id).Result;
             if (entity == null)
             {
-                ErrorDto errorDto = new ErrorDto();
-                errorDto.Errors.Add($"was not found in the database.");
-                context.Result = new JsonResult(errorDto);
+                var response = Response<NoData>.Fail("was not found in the database.", 404);
+                context.Result = new JsonResult(response);
             }
             else
             {

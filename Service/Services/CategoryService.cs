@@ -3,6 +3,7 @@ using Core.Intefaceses.Repositories;
 using Core.Intefaceses.Services;
 using Core.Intefaceses.UnitOfWorks;
 using Core.Models;
+using Core.Utilities.DTOs;
 using System.Threading.Tasks;
 
 namespace Service.Services
@@ -14,9 +15,10 @@ namespace Service.Services
         {
             _categoryRepository = categoryRepository;
         }
-        public async Task<CategoryDto> GetCategoryWithTasksByIdAsync(string categoryId)
+        public async Task<Response<CategoryDto>> GetCategoryWithTasksByIdAsync(long categoryId)
         {
-            return await _categoryRepository.GetCategoryWithTasksByIdAsync(categoryId);
+            var result = await _categoryRepository.GetCategoryWithTasksByIdAsync(categoryId);
+            return Response<CategoryDto>.Success(result, 200);
         }
     }
 }

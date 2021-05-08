@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Core.AutoMapper.DTOs;
 using System.Collections.Generic;
 using System.Linq;
+using Core.Utilities.DTOs;
 
 namespace WebAPI.Filters
 {
@@ -13,16 +14,9 @@ namespace WebAPI.Filters
         {
             if (!context.ModelState.IsValid)
             {
-                ErrorDto errorDto = new ErrorDto
-                {
-                    Status = 400
-                };
-                IEnumerable<ModelError> modelErrors = context.ModelState.Values.SelectMany(x => x.Errors);
-                modelErrors.ToList().ForEach(x =>
-                {
-                    errorDto.Errors.Add(x.ErrorMessage);
-                });
-                context.Result = new BadRequestObjectResult(errorDto);
+                IEnumerable<string> errors = context.ModelState.Values.SelectMany(x => x.Errors).Select(x => x.ErrorMessage);
+                var response = Response<NoContent>.Fail(errors, 404);
+                context.Result = new BadRequestObjectResult(response);
             }
         }
     }

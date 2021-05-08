@@ -1,4 +1,3 @@
-using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -15,7 +14,7 @@ using Service.Services;
 using WebAPI.Filters;
 using Core.Extensions;
 using Core.Intefaceses.Repositories;
-using Core.AutoMapper.Mapping;
+using Microsoft.OpenApi.Models;
 
 namespace WebAPI
 {
@@ -51,17 +50,16 @@ namespace WebAPI
                 options.SuppressModelStateInvalidFilter = true;
             });
 
-            var mapperConfig = new MapperConfiguration(mc =>
-            {
-                mc.AddProfile(new MapProfile());
-            });
-            IMapper mapper = mapperConfig.CreateMapper();
-
             services.AddMvc();
 
             services.AddControllers();
 
             services.AddDependencyResolvers();
+
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "MyApi", Version = "v1" });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -69,14 +67,11 @@ namespace WebAPI
         {
             if (env.IsDevelopment())
             {
-                app.UseDeveloperExceptionPage();
+                //app.UseDeveloperExceptionPage();
+                app.CustomException();
+                app.UseSwagger();
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "WebApplication1 v1"));
             }
-            else
-            {
-                //app.UseCustomException();
-            }
-
-            app.CustomException();
 
             app.UseHttpsRedirection();
 
@@ -93,3 +88,6 @@ namespace WebAPI
         }
     }
 }
+
+
+

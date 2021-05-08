@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
-using Core.AutoMapper.DTOs;
 using Core.Intefaceses.Services;
 using System.Linq;
+using Core.Utilities.DTOs;
 
 namespace WebAPI.Filters
 {
@@ -24,9 +24,8 @@ namespace WebAPI.Filters
             var entity = _service.GetByIdAsync(id).Result;
             if (entity == null)
             {
-                ErrorDto errorDto = new ErrorDto { Status = 404 };
-                errorDto.Errors.Add($"was not found in the database.");
-                context.Result = new NotFoundObjectResult(errorDto);
+                var response = Response<NoContent>.Fail("was not found in the database.", 404);
+                context.Result = new NotFoundObjectResult(response);
             }
             else
             {

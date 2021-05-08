@@ -59,7 +59,7 @@ namespace WebAPI.Controllers
 
         [ServiceFilter(typeof(NotFoundFilter<Category, CategoryDto>))]
         [HttpGet("/CategoryWithTasks/{id}")]
-        public IActionResult CategoryWithTasks(string id)
+        public IActionResult CategoryWithTasks(long id)
         {
             var category = _categoryService.GetCategoryWithTasksByIdAsync(id).Result;
             return Ok(category);
