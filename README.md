@@ -24,6 +24,7 @@
   <li>OOP - AOP - SOLID - Best Practices</li>
   <li>.net core api (restful api)</li>
   <li>.net core mvc</li>
+  <li>Extension method</li>
   <li>Entity framework core</li>
   <li>HttpClient (restapi client)</li>
   <li>N layer architecture</li>
