@@ -15,6 +15,12 @@ using WebAPI.Filters;
 using Core.Extensions;
 using Core.Intefaceses.Repositories;
 using Microsoft.OpenApi.Models;
+using Core.Models;
+using Core.Intefaceses.Utilities.Security;
+using Core.Utilities.Security;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.AspNetCore.Http;
 
 namespace WebAPI
 {
@@ -35,20 +41,42 @@ namespace WebAPI
                 {
                     o.MigrationsAssembly("Data");
                 });
-            });
+            }, ServiceLifetime.Transient);
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
             services.AddScoped(typeof(IService<,>), typeof(Service.Services.Service<,>));
             services.AddScoped<ITaskRepository, TaskRepository>();
             services.AddScoped<ITaskService, TaskService>();
             services.AddScoped<ICategoryRepository, CategoryRepository>();
             services.AddScoped<ICategoryService, CategoryService>();
-            services.AddScoped<IUnitOfWork, UnitOfWork>(); 
+            services.AddScoped<IUnitOfWork, TokenHelp>(); 
+            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IUserService, UserService>();
+            services.AddScoped<ITokenHelper, TokenHelper>();
             services.AddScoped(typeof(NotFoundFilter<,>));
+
+            services.Configure<TokenOptions>(Configuration.GetSection("TokenOption"));
 
             services.Configure<ApiBehaviorOptions>(options =>
             {
                 options.SuppressModelStateInvalidFilter = true;
             });
+
+            var tokenOptions = Configuration.GetSection("TokenOptions").Get<TokenOptions>();
+
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(options =>
+                {
+                    options.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateIssuer = true,
+                        ValidateAudience = true,
+                        ValidateLifetime = true,
+                        ValidIssuer = tokenOptions.Issuer,
+                        ValidAudience = tokenOptions.Audience,
+                        ValidateIssuerSigningKey = true,
+                        IssuerSigningKey = SecurityKeyHelper.CreateSecurityKey(tokenOptions.SecurityKey)
+                    };
+                });
 
             services.AddMvc();
 
@@ -67,15 +95,18 @@ namespace WebAPI
         {
             if (env.IsDevelopment())
             {
-                //app.UseDeveloperExceptionPage();
-                app.CustomException();
+                app.UseDeveloperExceptionPage();
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "WebApplication1 v1"));
             }
 
+            app.CustomException();
+
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseAuthentication();
 
             app.UseAuthorization();
 

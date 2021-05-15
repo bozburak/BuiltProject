@@ -12,6 +12,10 @@ namespace Core.AutoMapper.Mapping
             CreateMap<TaskDto, Task>();
             CreateMap<Category, CategoryDto>();
             CreateMap<CategoryDto, Category>();
+            CreateMap<User, UserDto>();
+            CreateMap<UserDto, User>();
+            CreateMap<User, UserForRegisterDto>();
+            CreateMap<UserForRegisterDto, User>();
         }
     }
 }

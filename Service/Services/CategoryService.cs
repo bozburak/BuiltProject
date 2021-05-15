@@ -3,7 +3,7 @@ using Core.Intefaceses.Repositories;
 using Core.Intefaceses.Services;
 using Core.Intefaceses.UnitOfWorks;
 using Core.Models;
-using Core.Utilities.DTOs;
+using Core.Utilities.Results;
 using System.Threading.Tasks;
 
 namespace Service.Services

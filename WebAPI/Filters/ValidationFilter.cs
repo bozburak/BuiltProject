@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Core.AutoMapper.DTOs;
 using System.Collections.Generic;
 using System.Linq;
-using Core.Utilities.DTOs;
+using Core.Utilities.Results;
 
 namespace WebAPI.Filters
 {

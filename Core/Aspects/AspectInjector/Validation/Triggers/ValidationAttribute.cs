@@ -13,7 +13,7 @@ namespace Core.Aspects.AspectInjector.Validation.Triggers
         {
             if (!typeof(IValidator).IsAssignableFrom(validatorType))
             {
-                throw new System.Exception("This is not validation class");
+                throw new Exception("This is not validation class");
             }
 
             _validatorType = validatorType;

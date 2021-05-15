@@ -1,6 +1,6 @@
 ﻿using Core.AutoMapper.DTOs;
 using Core.Models;
-using Core.Utilities.DTOs;
+using Core.Utilities.Results;
 using System.Threading.Tasks;
 
 namespace Core.Intefaceses.Services

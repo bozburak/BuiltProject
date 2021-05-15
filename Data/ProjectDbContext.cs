@@ -10,12 +10,21 @@ namespace Data
         public ProjectDbContext(DbContextOptions<ProjectDbContext> option) : base(option) {}
         public DbSet<Task> Tasks { get; set; }
         public DbSet<Category> Categories { get; set; }
+        public DbSet<User> Users { get; set; }
+        public DbSet<Claim> Claims { get; set; }
+        public DbSet<UserClaim> UserClaims { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new TaskConfiguration());
+            modelBuilder.ApplyConfiguration(new CategoryConfiguration());
+            modelBuilder.ApplyConfiguration(new UserConfiguration());
+            modelBuilder.ApplyConfiguration(new ClaimConfiguration());
+            modelBuilder.ApplyConfiguration(new UserClaimConfiguration());
 
-            modelBuilder.ApplyConfiguration(new TaskSeed(new string[] { "1", "2", "3" }));
-            modelBuilder.ApplyConfiguration(new CategorySeed(new string[] { "1", "2", "3" }));
+            modelBuilder.ApplyConfiguration(new TaskSeed(new long[] { 1, 2, 3 }));
+            modelBuilder.ApplyConfiguration(new CategorySeed(new long[] { 1, 2, 3 }));
+            modelBuilder.ApplyConfiguration(new ClaimSeed());
         }
     }
 }

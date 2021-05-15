@@ -1,4 +1,4 @@
-﻿namespace Core.Utilities.DTOs
+﻿namespace Core.Utilities.Results
 {
     public class NoContent
     {

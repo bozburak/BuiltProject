@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Core.Utilities.DTOs
+namespace Core.Utilities.Results
 {
     public class Response<T> where T : class
     {

@@ -1,0 +1,45 @@
+﻿using Microsoft.AspNetCore.Mvc;
+using Core.AutoMapper.DTOs;
+using Core.Intefaceses.Services;
+using System.Linq;
+
+namespace WebAPI.Controllers
+{
+    [Route("api/[controller]")]
+    [ApiController]
+    public class UsersController : ControllerBase
+    {
+        private IUserService _userService;
+
+        public UsersController(IUserService userService)
+        {
+            _userService = userService;
+        }
+
+        [HttpPost("Login")]
+        public ActionResult Login(UserDto userDto)
+        {
+            var userToLogin = _userService.Login(userDto);
+            if (userToLogin.Errors.Count() <= 0)
+            {
+                return BadRequest(userToLogin);
+            }
+
+            var result = _userService.CreateAccessToken(userToLogin.Data);
+            return Ok(result);
+        }
+
+        [HttpPost("Register")]
+        public ActionResult Register(UserForRegisterDto userForRegisterDto)
+        {
+            if (_userService.Where(x => x.Email == userForRegisterDto.Email).Data.Count() <= 0)
+            {
+                return BadRequest("exist user");
+            }
+
+            var registerResult = _userService.Register(userForRegisterDto, userForRegisterDto.Password);
+            var result = _userService.CreateAccessToken(registerResult.Data);
+            return Ok(result);
+        }
+    }
+}

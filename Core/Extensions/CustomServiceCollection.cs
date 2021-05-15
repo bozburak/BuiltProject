@@ -1,7 +1,8 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using System;
 using Core.CrossCuttingConcerns;
 using Core.CrossCuttingConcerns.Caching.Microsoft;
-using System;
+using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Core.Extensions
 {
@@ -13,6 +14,7 @@ namespace Core.Extensions
         {
             services.AddMemoryCache();
             services.AddSingleton<ICacheManager, MemoryCacheManager>();
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             ServiceProvider = services.BuildServiceProvider();
         }
     }

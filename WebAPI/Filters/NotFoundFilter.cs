@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc.Filters;
 using Core.Intefaceses.Services;
 using System.Linq;
-using Core.Utilities.DTOs;
+using Core.Utilities.Results;
 
 namespace WebAPI.Filters
 {
@@ -20,7 +20,7 @@ namespace WebAPI.Filters
 
         public void OnActionExecuting(ActionExecutingContext context)
         {
-            var id = (string)context.ActionArguments.Values.FirstOrDefault();
+            var id = (long)context.ActionArguments.Values.FirstOrDefault();
             var entity = _service.GetByIdAsync(id).Result;
             if (entity == null)
             {

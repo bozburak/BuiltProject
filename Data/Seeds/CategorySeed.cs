@@ -6,9 +6,9 @@ namespace Data.Seeds
 {
     public class CategorySeed : IEntityTypeConfiguration<Category>
     {
-        private readonly string[] _ids;
+        private readonly long[] _ids;
 
-        public CategorySeed(string[] ids)
+        public CategorySeed(long[] ids)
         {
             _ids = ids;
         }
@@ -17,9 +17,9 @@ namespace Data.Seeds
         {
             builder.HasData
             (
-                new Task { Id = 1, Name = "First Category", Status = true },
-                new Task { Id = 2, Name = "Second Category", Status = true },
-                new Task { Id = 3, Name = "Third Category", Status = true }
+                new Category { Id = _ids[0], Name = "First Category", IsDeleted = false },
+                new Category { Id = _ids[1], Name = "Second Category", IsDeleted = false },
+                new Category { Id = _ids[2], Name = "Third Category", IsDeleted = false }
             );
         }
     }

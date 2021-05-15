@@ -3,11 +3,11 @@ using System.Threading.Tasks;
 
 namespace Data.UnitOfWorks
 {
-    public class UnitOfWork : IUnitOfWork
+    public class TokenHelp : IUnitOfWork
     {
         private readonly ProjectDbContext _ProjectDbContext;
 
-        public UnitOfWork(ProjectDbContext ProjectDbContext)
+        public TokenHelp(ProjectDbContext ProjectDbContext)
         {
             _ProjectDbContext = ProjectDbContext;
         }

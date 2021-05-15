@@ -1,5 +1,4 @@
 ﻿using Core.Aspects.AspectInjector.Logging;
-using Core.Aspects.AspectInjector.Caching.Triggers;
 using Core.Intefaceses.Repositories;
 using Core.Intefaceses.Services;
 using Core.Intefaceses.UnitOfWorks;
@@ -8,8 +7,7 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Core.AutoMapper;
-using System.Linq;
-using Core.Utilities.DTOs;
+using Core.Utilities.Results;
 
 namespace Service.Services
 {
@@ -55,13 +53,13 @@ namespace Service.Services
             return Response<IEnumerable<TDto>>.Success(ObjectMapper.Mapper.Map<IEnumerable<TDto>>(result), 200);
         }
 
-        public async Task<Response<TDto>> GetByIdAsync(string id)
+        public async Task<Response<TDto>> GetByIdAsync(long id)
         {
             var result = await _repository.GetByIdAsync(id);
             return Response<TDto>.Success(ObjectMapper.Mapper.Map<TDto>(result), 200);
         }
 
-        public Response<NoContent> Remove(string id)
+        public Response<NoContent> Remove(long id)
         {
             var isExist  = _repository.GetByIdAsync(id).Result;
 
@@ -72,7 +70,7 @@ namespace Service.Services
             return Response<NoContent>.Success(204);
         }
 
-        public Response<NoContent> RemoveRange(IEnumerable<string> ids)
+        public Response<NoContent> RemoveRange(IEnumerable<long> ids)
         {
             List<TEntity> entities = new List<TEntity>();
             foreach (var id in ids)

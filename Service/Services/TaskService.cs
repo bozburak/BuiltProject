@@ -1,10 +1,11 @@
 ﻿using Core.Aspects.AspectInjector.Caching.Triggers;
+using Core.Aspects.AspectInjector.Security.Triggers;
 using Core.Aspects.AspectInjector.Validation.Triggers;
 using Core.AutoMapper.DTOs;
 using Core.Intefaceses.Repositories;
 using Core.Intefaceses.Services;
 using Core.Intefaceses.UnitOfWorks;
-using Core.Utilities.DTOs;
+using Core.Utilities.Results;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -23,6 +24,7 @@ namespace Service.Services
             return Response<TaskDto>.Success(result, 200);
         }
 
+        [SecurityAttribute("admin")]
         [CacheAttribute("GetAllAsync")]
         public new async Task<Response<IEnumerable<TaskDto>>> GetAllAsync()
         {

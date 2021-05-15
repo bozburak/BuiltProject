@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Diagnostics;
 using System.Text.Json;
-using Core.Utilities.DTOs;
+using Core.Utilities.Results;
 
 namespace Core.Extensions
 {
