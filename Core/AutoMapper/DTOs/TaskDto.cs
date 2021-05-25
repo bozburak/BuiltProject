@@ -7,5 +7,6 @@ namespace Core.AutoMapper.DTOs
         [Required(ErrorMessage = "{0} alanı gereklidir.")]
         public string Name { get; set; }
         public bool Status { get; set; }
+        public int CategoryId { get; set; }
     }
 }

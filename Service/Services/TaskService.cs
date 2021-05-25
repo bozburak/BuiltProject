@@ -18,7 +18,7 @@ namespace Service.Services
         {
             _taskRepository = taskRepository;
         }
-        public async Task<Response<TaskDto>> GetTaskWithCategoryByIdAsync(long taskId)
+        public async Task<Response<TaskDto>> GetTaskWithCategoryByIdAsync(int taskId)
         {
             var result = await _taskRepository.GetTaskWithCategoryByIdAsync(taskId);
             return Response<TaskDto>.Success(result, 200);

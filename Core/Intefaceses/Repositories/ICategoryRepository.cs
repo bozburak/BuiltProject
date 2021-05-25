@@ -6,6 +6,6 @@ namespace Core.Intefaceses.Repositories
 {
     public interface ICategoryRepository : IRepository<Category>
     {
-        Task<CategoryDto> GetCategoryWithTasksByIdAsync(long categoryId);
+        Task<CategoryDto> GetCategoryWithTasksByIdAsync(int categoryId);
     }
 }

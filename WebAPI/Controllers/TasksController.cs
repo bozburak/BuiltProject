@@ -26,7 +26,7 @@ namespace WebAPI.Controllers
 
         [ServiceFilter(typeof(NotFoundFilter<Task, TaskDto>))]
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetById(long id)
+        public async Task<IActionResult> GetById(int id)
         {
             var task = await _taskService.GetByIdAsync(id);
             return Ok(task);
@@ -49,7 +49,7 @@ namespace WebAPI.Controllers
 
         [ServiceFilter(typeof(NotFoundFilter<Core.Models.Task, TaskDto>))]
         [HttpDelete("{id}")]
-        public IActionResult Delete(long id)
+        public IActionResult Delete(int id)
         {
             _taskService.Remove(id);
             return NoContent();
@@ -57,7 +57,7 @@ namespace WebAPI.Controllers
 
         [ServiceFilter(typeof(NotFoundFilter<Core.Models.Task, TaskDto>))]
         [HttpGet("/TaskWithCategory/{id}")]
-        public IActionResult TaskWithCategory(long id)
+        public IActionResult TaskWithCategory(int id)
         {
             var task = _taskService.GetTaskWithCategoryByIdAsync(id).Result;
             return Ok(task);

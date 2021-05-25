@@ -3,23 +3,24 @@ using System.Threading.Tasks;
 
 namespace Data.UnitOfWorks
 {
-    public class TokenHelp : IUnitOfWork
+    public class UnitOfWork : IUnitOfWork
     {
-        private readonly ProjectDbContext _ProjectDbContext;
+        private readonly ProjectDbContext _projectDbContext;
 
-        public TokenHelp(ProjectDbContext ProjectDbContext)
+        public UnitOfWork(ProjectDbContext ProjectDbContext)
         {
-            _ProjectDbContext = ProjectDbContext;
+            _projectDbContext = ProjectDbContext;
         }
 
         public void Commit()
         {
-            _ProjectDbContext.SaveChanges();
+            _projectDbContext.SaveChanges();
         }
 
         public async Task CommitAsync()
         {
-            await _ProjectDbContext.SaveChangesAsync();
+            var x = await _projectDbContext.SaveChangesAsync();
+            var y = x;
         }
     }
 }

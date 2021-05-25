@@ -12,7 +12,7 @@ namespace Data.Repositories
         private ProjectDbContext _projectDbContext { get => _context as ProjectDbContext; }
         public UserRepository(ProjectDbContext dbContext) : base(dbContext) { }
 
-        public IEnumerable<Claim> GetClaims(long userId)
+        public IEnumerable<Claim> GetClaims(int userId)
         {
             var result = _projectDbContext.UserClaims.Join(_projectDbContext.Claims, userClaims => userClaims.Id, claims => claims.Id,
                 (userClaims, claims) => new Claim

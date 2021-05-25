@@ -20,7 +20,7 @@ namespace WebAPI.Controllers
         public ActionResult Login(UserDto userDto)
         {
             var userToLogin = _userService.Login(userDto);
-            if (userToLogin.Errors.Count() <= 0)
+            if (userToLogin.Errors != null)
             {
                 return BadRequest(userToLogin);
             }
@@ -32,7 +32,7 @@ namespace WebAPI.Controllers
         [HttpPost("Register")]
         public ActionResult Register(UserForRegisterDto userForRegisterDto)
         {
-            if (_userService.Where(x => x.Email == userForRegisterDto.Email).Data.Count() <= 0)
+            if (_userService.Where(x => x.Email == userForRegisterDto.Email).Data.Count() > 0)
             {
                 return BadRequest("exist user");
             }

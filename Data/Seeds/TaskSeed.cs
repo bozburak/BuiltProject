@@ -6,9 +6,9 @@ namespace Data.Seeds
 {
     public class TaskSeed : IEntityTypeConfiguration<Task>
     {
-        private readonly long[] _ids;
+        private readonly int[] _ids;
 
-        public TaskSeed(long[] ids)
+        public TaskSeed(int[] ids)
         {
             _ids = ids;
         }

@@ -7,6 +7,6 @@ namespace Core.Intefaceses.Services
 {
     public interface ICategoryService : IService<Category, CategoryDto>
     {
-        Task<Response<CategoryDto>> GetCategoryWithTasksByIdAsync(long categoryId);
+        Task<Response<CategoryDto>> GetCategoryWithTasksByIdAsync(int categoryId);
     }
 }

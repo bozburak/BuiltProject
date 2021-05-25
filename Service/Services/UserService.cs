@@ -27,7 +27,7 @@ namespace Service.Services
             return Response<AccessToken>.Success(accessToken, 200);
         }
 
-        public Response<IEnumerable<Claim>> GetClaims(long userId)
+        public Response<IEnumerable<Claim>> GetClaims(int userId)
         {
             var result = _userRepository.GetClaims(userId);
             return Response<IEnumerable<Claim>>.Success(result, 200);

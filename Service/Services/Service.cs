@@ -53,13 +53,13 @@ namespace Service.Services
             return Response<IEnumerable<TDto>>.Success(ObjectMapper.Mapper.Map<IEnumerable<TDto>>(result), 200);
         }
 
-        public async Task<Response<TDto>> GetByIdAsync(long id)
+        public async Task<Response<TDto>> GetByIdAsync(int id)
         {
             var result = await _repository.GetByIdAsync(id);
             return Response<TDto>.Success(ObjectMapper.Mapper.Map<TDto>(result), 200);
         }
 
-        public Response<NoContent> Remove(long id)
+        public Response<NoContent> Remove(int id)
         {
             var isExist  = _repository.GetByIdAsync(id).Result;
 
@@ -70,7 +70,7 @@ namespace Service.Services
             return Response<NoContent>.Success(204);
         }
 
-        public Response<NoContent> RemoveRange(IEnumerable<long> ids)
+        public Response<NoContent> RemoveRange(IEnumerable<int> ids)
         {
             List<TEntity> entities = new List<TEntity>();
             foreach (var id in ids)

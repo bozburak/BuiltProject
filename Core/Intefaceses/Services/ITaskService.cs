@@ -6,6 +6,6 @@ namespace Core.Intefaceses.Services
 {
     public interface ITaskService : IService<Core.Models.Task, TaskDto>
     {
-        Task<Response<TaskDto>> GetTaskWithCategoryByIdAsync(long taskId);
+        Task<Response<TaskDto>> GetTaskWithCategoryByIdAsync(int taskId);
     }
 }

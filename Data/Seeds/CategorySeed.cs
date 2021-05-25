@@ -6,9 +6,9 @@ namespace Data.Seeds
 {
     public class CategorySeed : IEntityTypeConfiguration<Category>
     {
-        private readonly long[] _ids;
+        private readonly int[] _ids;
 
-        public CategorySeed(long[] ids)
+        public CategorySeed(int[] ids)
         {
             _ids = ids;
         }

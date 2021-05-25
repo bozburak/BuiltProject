@@ -5,10 +5,9 @@ using System;
 namespace Core.Aspects.AspectInjector.Validation.Triggers
 {
     [Injection(typeof(ValidationAspect))]
-    [AttributeUsage(AttributeTargets.Method | AttributeTargets.Class)]
     public class ValidationAttribute : Attribute
     {
-        public Type _validatorType { get; }
+        public Type _validatorType;
         public ValidationAttribute(Type validatorType)
         {
             if (!typeof(IValidator).IsAssignableFrom(validatorType))

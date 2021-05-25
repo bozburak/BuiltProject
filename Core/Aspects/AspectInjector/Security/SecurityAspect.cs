@@ -1,22 +1,21 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using AspectInjector.Broker;
+using Core.Aspects.AspectInjector.Security.Triggers;
 using Core.Extensions;
-using Microsoft.AspNetCore.Http;
 
-namespace Core.Aspects.AspectInjector.Logging
+namespace Core.Aspects.AspectInjector.Security
 {
     [Aspect(Scope.Global)]
-    [Injection(typeof(SecurityAspect))]
-    public class SecurityAspect : Attribute
+    public class SecurityAspect
     {
         [Advice(Kind.Before)]
         public void Handle([Argument(Source.Triggers)] Attribute[] attributes)
         {
-            var httpContextAccessor = attributes.OfType<HttpContextAccessor>().FirstOrDefault();
-            var roles = attributes.OfType<string[]>().FirstOrDefault();
-            var roleClaims = httpContextAccessor.HttpContext.User.ClaimRoles();
-            foreach (var role in roles)
+            var securityAttiribute = attributes.OfType<SecurityAttribute>().FirstOrDefault();
+            var roleClaims = securityAttiribute._httpContextAccessor.HttpContext.User.ClaimRoles();
+            foreach (var role in securityAttiribute._roles)
             {
                 if (roleClaims.Contains(role))
                 {

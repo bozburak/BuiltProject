@@ -12,7 +12,7 @@ namespace Data.Repositories
         private ProjectDbContext _projectDbContext { get => _context as ProjectDbContext; }
         public CategoryRepository(ProjectDbContext dbContext) : base(dbContext) { }
 
-        public async Task<CategoryDto> GetCategoryWithTasksByIdAsync(long categoryId)
+        public async Task<CategoryDto> GetCategoryWithTasksByIdAsync(int categoryId)
         {
             var result = await _projectDbContext.Categories.Include(x => x.Tasks).SingleOrDefaultAsync(x => x.Id == categoryId);
             return ObjectMapper.Mapper.Map<CategoryDto>(result);

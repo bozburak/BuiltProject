@@ -41,14 +41,14 @@ namespace WebAPI
                 {
                     o.MigrationsAssembly("Data");
                 });
-            }, ServiceLifetime.Transient);
+            });
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
             services.AddScoped(typeof(IService<,>), typeof(Service.Services.Service<,>));
             services.AddScoped<ITaskRepository, TaskRepository>();
             services.AddScoped<ITaskService, TaskService>();
             services.AddScoped<ICategoryRepository, CategoryRepository>();
             services.AddScoped<ICategoryService, CategoryService>();
-            services.AddScoped<IUnitOfWork, TokenHelp>(); 
+            services.AddScoped<IUnitOfWork, UnitOfWork>(); 
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<ITokenHelper, TokenHelper>();

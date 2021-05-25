@@ -22,8 +22,8 @@ namespace Data
             modelBuilder.ApplyConfiguration(new ClaimConfiguration());
             modelBuilder.ApplyConfiguration(new UserClaimConfiguration());
 
-            modelBuilder.ApplyConfiguration(new TaskSeed(new long[] { 1, 2, 3 }));
-            modelBuilder.ApplyConfiguration(new CategorySeed(new long[] { 1, 2, 3 }));
+            modelBuilder.ApplyConfiguration(new TaskSeed(new int[] { 1, 2, 3 }));
+            modelBuilder.ApplyConfiguration(new CategorySeed(new int[] { 1, 2, 3 }));
             modelBuilder.ApplyConfiguration(new ClaimSeed());
         }
     }

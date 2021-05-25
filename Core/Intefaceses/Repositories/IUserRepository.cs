@@ -5,6 +5,6 @@ namespace Core.Intefaceses.Repositories
 {
     public interface IUserRepository : IRepository<User>
     {
-        public IEnumerable<Claim> GetClaims(long userId);
+        public IEnumerable<Claim> GetClaims(int userId);
     }
 }
