@@ -19,8 +19,7 @@ namespace Data.UnitOfWorks
 
         public async Task CommitAsync()
         {
-            var x = await _projectDbContext.SaveChangesAsync();
-            var y = x;
+            await _projectDbContext.SaveChangesAsync();
         }
     }
 }

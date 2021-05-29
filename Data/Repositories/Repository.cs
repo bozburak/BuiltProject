@@ -18,6 +18,10 @@ namespace Data.Repositories
             _context = dbContext;
             _dbSet = _context.Set<TEntity>();
         }
+        public void Add(TEntity entity)
+        {
+            _dbSet.Add(entity);
+        }
         public async Task AddAsync(TEntity entity)
         {
             await _dbSet.AddAsync(entity);
@@ -26,6 +30,10 @@ namespace Data.Repositories
         public async Task AddRangeAsync(IEnumerable<TEntity> entities)
         {
             await _dbSet.AddRangeAsync(entities);
+        }
+        public void AddRange(IEnumerable<TEntity> entities)
+        {
+            _dbSet.AddRange(entities);
         }
 
         public IEnumerable<TEntity> Where(Expression<Func<TEntity, bool>> predicate)

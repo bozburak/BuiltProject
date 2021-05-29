@@ -5,6 +5,6 @@ namespace Core.Intefaceses.Utilities.Security
 {
     public interface ITokenHelper
     {
-        public AccessToken CreateToken(User user, IEnumerable<Claim> claims);
+        public Token CreateToken(User user, IEnumerable<Claim> claims);
     }
 }

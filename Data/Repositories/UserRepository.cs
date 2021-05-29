@@ -1,9 +1,7 @@
 ﻿using Core.Intefaceses.Repositories;
 using Core.Models;
-using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace Data.Repositories
 {
@@ -14,13 +12,13 @@ namespace Data.Repositories
 
         public IEnumerable<Claim> GetClaims(int userId)
         {
-            var result = _projectDbContext.UserClaims.Join(_projectDbContext.Claims, userClaims => userClaims.Id, claims => claims.Id,
-                (userClaims, claims) => new Claim
-                {
-                    Id = claims.Id,
-                    Name = claims.Name
-                }).ToList();
-            return result;
+            return (from claim in _projectDbContext.Claims join
+                          userClaim in _projectDbContext.UserClaims on
+                          claim.Id equals userClaim.ClaimId select new Claim
+                          {
+                              Id = claim.Id,
+                              Name = claim.Name
+                          }).ToList();
         }
     }
 }

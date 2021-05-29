@@ -8,6 +8,7 @@ using Core.Utilities.Results;
 using Core.Utilities.Security;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Service.Services
 {
@@ -20,11 +21,15 @@ namespace Service.Services
             _userRepository = userRepository;
             _tokenHelper = tokenHelper;
         }
-        public Response<AccessToken> CreateAccessToken(User user)
+        public Response<Token> CreateAccessToken(User user)
         {
             var claims = _userRepository.GetClaims(user.Id);
-            var accessToken = _tokenHelper.CreateToken(user, claims);
-            return Response<AccessToken>.Success(accessToken, 200);
+            var token = _tokenHelper.CreateToken(user, claims);
+            user.RefreshToken = token.RefreshToken;
+            user.RefreshTokenEndDate = token.Expiration.AddMinutes(10);
+            _userRepository.Update(user);
+            _unitOfWork.CommitAsync();
+            return Response<Token>.Success(token, 200);
         }
 
         public Response<IEnumerable<Claim>> GetClaims(int userId)
@@ -62,8 +67,8 @@ namespace Service.Services
                 PasswordSalt = passwordSalt,
                 Status = true
             };
-            _userRepository.AddAsync(user);
-            _unitOfWork.CommitAsync();
+            _userRepository.Add(user);
+            _unitOfWork.Commit();
             return Response<User>.Success(user, 200);
         }
     }

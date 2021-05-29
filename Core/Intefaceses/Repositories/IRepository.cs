@@ -12,6 +12,8 @@ namespace Core.Intefaceses.Repositories
         IEnumerable<TEntity> Where(Expression<Func<TEntity, bool>> predicate);
         Task AddAsync(TEntity entity);
         Task AddRangeAsync(IEnumerable<TEntity> entities);
+        void Add(TEntity entity);
+        void AddRange(IEnumerable<TEntity> entities);
         void Remove(TEntity entity);
         void RemoveRange(IEnumerable<TEntity> entities);
         void Update(TEntity entity);

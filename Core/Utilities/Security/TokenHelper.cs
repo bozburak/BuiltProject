@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
-using System.Text;
+using System.Security.Cryptography;
 using Core.Intefaceses.Utilities.Security;
 using Core.Models;
 using Microsoft.Extensions.Configuration;
@@ -21,7 +21,7 @@ namespace Core.Utilities.Security
             _tokenOptions = Configuration.GetSection("TokenOptions").Get<TokenOptions>();
 
         }
-        public AccessToken CreateToken(User user, IEnumerable<Core.Models.Claim> claims)
+        public Token CreateToken(User user, IEnumerable<Core.Models.Claim> claims)
         {
             _accessTokenExpiration = DateTime.Now.AddMinutes(_tokenOptions.AccessTokenExpiration);
             var securityKey = SecurityKeyHelper.CreateSecurityKey(_tokenOptions.SecurityKey);
@@ -30,10 +30,11 @@ namespace Core.Utilities.Security
             var jwtSecurityTokenHandler = new JwtSecurityTokenHandler();
             var token = jwtSecurityTokenHandler.WriteToken(jwt);
 
-            return new AccessToken
+            return new Token
             {
-                Token = token,
-                Expiration = _accessTokenExpiration
+                AccessToken = token,
+                Expiration = _accessTokenExpiration,
+                RefreshToken = CreateRefreshToken()
             };
 
         }
@@ -65,6 +66,16 @@ namespace Core.Utilities.Security
                 securityClaims.Add(new System.Security.Claims.Claim(ClaimTypes.Role, claim.Name));
             }
             return securityClaims;
+        }
+
+        private string CreateRefreshToken()
+        {
+            byte[] number = new byte[32];
+            using (RandomNumberGenerator random = RandomNumberGenerator.Create())
+            {
+                random.GetBytes(number);
+                return Convert.ToBase64String(number);
+            }
         }
     }
 }
