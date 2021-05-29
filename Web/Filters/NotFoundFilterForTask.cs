@@ -1,9 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
-using Core.AutoMapper.DTOs;
 using Core.Intefaceses.Services;
 using System.Linq;
-using Core.Utilities.DTOs;
+using Core.Utilities.Results;
 
 namespace Web.Filters
 {
@@ -21,11 +20,11 @@ namespace Web.Filters
 
         public void OnActionExecuting(ActionExecutingContext context)
         {
-            var id = (string)context.ActionArguments.Values.FirstOrDefault();
+            var id = (int)context.ActionArguments.Values.FirstOrDefault();
             var entity = _service.GetByIdAsync(id).Result;
             if (entity == null)
             {
-                var response = Response<NoData>.Fail("was not found in the database.", 404);
+                var response = Response<NoContent>.Fail("was not found in the database.", 404);
                 context.Result = new JsonResult(response);
             }
             else

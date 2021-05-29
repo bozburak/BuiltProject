@@ -55,7 +55,7 @@ namespace Web.Controllers
 
         [ServiceFilter(typeof(NotFoundFilterForTask))]
         [HttpDelete]
-        public JsonResult Delete(string id)
+        public JsonResult Delete(int id)
         {
             //var result = _apiClient.Remove(id);
             var result = _taskService.Remove(id);
