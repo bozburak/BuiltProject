@@ -12,14 +12,14 @@ namespace Core.CrossCuttingConcerns.Caching.Microsoft
             _memoryCache = memoryCache;
         }
 
-        public void Set(string key, object value, int duration)
-        {
-            _memoryCache.Set(key, value, TimeSpan.FromMinutes(duration));
-        }
-
         public object Get(string key)
         {
             return _memoryCache.Get(key);
+        }
+
+        public void Set(string key, object value, int duration)
+        {
+            _memoryCache.Set(key, value, TimeSpan.FromMinutes(duration));
         }
 
         public bool IsSet(string key)
