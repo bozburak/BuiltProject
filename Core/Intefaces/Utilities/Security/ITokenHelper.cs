@@ -1,7 +1,7 @@
 ﻿using Core.Models;
 using System.Collections.Generic;
 
-namespace Core.Intefaceses.Utilities.Security
+namespace Core.Intefaces.Utilities.Security
 {
     public interface ITokenHelper
     {

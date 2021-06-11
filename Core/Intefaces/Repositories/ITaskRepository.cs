@@ -1,7 +1,7 @@
 ﻿using Core.AutoMapper.DTOs;
 using System.Threading.Tasks;
 
-namespace Core.Intefaceses.Repositories
+namespace Core.Intefaces.Repositories
 {
     public interface ITaskRepository : IRepository<Core.Models.Task> 
     {

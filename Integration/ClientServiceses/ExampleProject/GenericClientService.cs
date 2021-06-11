@@ -1,4 +1,4 @@
-﻿using Core.Intefaceses.Integration;
+﻿using Core.Intefaces.Integration;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;

@@ -1,4 +1,4 @@
-﻿using Core.Intefaceses.Repositories;
+﻿using Core.Intefaces.Repositories;
 using Core.Models;
 using System.Collections.Generic;
 using System.Linq;

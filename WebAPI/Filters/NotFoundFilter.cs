@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
-using Core.Intefaceses.Services;
+using Core.Intefaces.Services;
 using System.Linq;
 using Core.Utilities.Results;
 

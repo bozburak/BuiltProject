@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace Core.Intefaceses.UnitOfWorks
+namespace Core.Intefaces.UnitOfWorks
 {
     public interface IUnitOfWork
     {

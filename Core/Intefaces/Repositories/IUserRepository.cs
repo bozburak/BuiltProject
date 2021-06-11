@@ -1,7 +1,7 @@
 ﻿using Core.Models;
 using System.Collections.Generic;
 
-namespace Core.Intefaceses.Repositories
+namespace Core.Intefaces.Repositories
 {
     public interface IUserRepository : IRepository<User>
     {

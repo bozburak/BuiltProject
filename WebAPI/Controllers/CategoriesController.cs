@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Core.AutoMapper.DTOs;
-using Core.Intefaceses.Services;
+using Core.Intefaces.Services;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using WebAPI.Filters;

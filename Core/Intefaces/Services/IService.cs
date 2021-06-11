@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
-namespace Core.Intefaceses.Services
+namespace Core.Intefaces.Services
 {
     public interface IService<TEntity, TDto> where TEntity : class where TDto : class
     {

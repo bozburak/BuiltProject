@@ -2,7 +2,7 @@
 using Core.Utilities.Results;
 using System.Threading.Tasks;
 
-namespace Core.Intefaceses.Services
+namespace Core.Intefaces.Services
 {
     public interface ITaskService : IService<Core.Models.Task, TaskDto>
     {

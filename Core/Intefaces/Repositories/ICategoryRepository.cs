@@ -2,7 +2,7 @@
 using Core.Models;
 using System.Threading.Tasks;
 
-namespace Core.Intefaceses.Repositories
+namespace Core.Intefaces.Repositories
 {
     public interface ICategoryRepository : IRepository<Category>
     {

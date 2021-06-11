@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Core.Intefaceses.Integration
+namespace Core.Intefaces.Integration
 {
     public interface IIntegrationProjectClient<TEntity>
     {

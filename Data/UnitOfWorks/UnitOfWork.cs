@@ -1,4 +1,4 @@
-﻿using Core.Intefaceses.UnitOfWorks;
+﻿using Core.Intefaces.UnitOfWorks;
 using System.Threading.Tasks;
 
 namespace Data.UnitOfWorks

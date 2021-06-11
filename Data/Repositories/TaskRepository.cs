@@ -1,6 +1,6 @@
 ﻿using Core.AutoMapper;
 using Core.AutoMapper.DTOs;
-using Core.Intefaceses.Repositories;
+using Core.Intefaces.Repositories;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
 

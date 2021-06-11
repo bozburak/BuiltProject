@@ -4,7 +4,7 @@ using Core.Utilities.Results;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Core.Intefaceses.Services
+namespace Core.Intefaces.Services
 {
     public interface IUserService : IService<User, UserDto>
     {

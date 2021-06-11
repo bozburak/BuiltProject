@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Core.AutoMapper.DTOs;
-using Core.Intefaceses.Services;
+using Core.Intefaces.Services;
 using System.Linq;
 
 namespace WebAPI.Controllers

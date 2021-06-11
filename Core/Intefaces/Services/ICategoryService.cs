@@ -3,7 +3,7 @@ using Core.Models;
 using Core.Utilities.Results;
 using System.Threading.Tasks;
 
-namespace Core.Intefaceses.Services
+namespace Core.Intefaces.Services
 {
     public interface ICategoryService : IService<Category, CategoryDto>
     {

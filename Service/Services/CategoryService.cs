@@ -1,7 +1,7 @@
 ﻿using Core.AutoMapper.DTOs;
-using Core.Intefaceses.Repositories;
-using Core.Intefaceses.Services;
-using Core.Intefaceses.UnitOfWorks;
+using Core.Intefaces.Repositories;
+using Core.Intefaces.Services;
+using Core.Intefaces.UnitOfWorks;
 using Core.Models;
 using Core.Utilities.Results;
 using System.Threading.Tasks;

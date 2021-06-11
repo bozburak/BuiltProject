@@ -1,7 +1,7 @@
 ﻿using Core.Aspects.AspectInjector.Logging;
-using Core.Intefaceses.Repositories;
-using Core.Intefaceses.Services;
-using Core.Intefaceses.UnitOfWorks;
+using Core.Intefaces.Repositories;
+using Core.Intefaces.Services;
+using Core.Intefaces.UnitOfWorks;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;

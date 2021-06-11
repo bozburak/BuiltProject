@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Core.Intefaceses.Repositories;
+using Core.Intefaces.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
