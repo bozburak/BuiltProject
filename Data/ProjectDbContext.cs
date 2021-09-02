@@ -7,7 +7,7 @@ namespace Data
 {
     public class ProjectDbContext : DbContext
     {
-        public ProjectDbContext(DbContextOptions<ProjectDbContext> option) : base(option) {}
+        public ProjectDbContext(DbContextOptions<ProjectDbContext> options) : base(options) {}
         public DbSet<Task> Tasks { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<User> Users { get; set; }

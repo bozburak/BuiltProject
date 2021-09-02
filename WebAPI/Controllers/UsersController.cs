@@ -2,6 +2,7 @@
 using Core.AutoMapper.DTOs;
 using Core.Intefaces.Services;
 using System.Linq;
+using Core.Utilities.Results;
 
 namespace WebAPI.Controllers
 {
@@ -34,7 +35,7 @@ namespace WebAPI.Controllers
         {
             if (_userService.Where(x => x.Email == userForRegisterDto.Email).Data.Count() > 0)
             {
-                return BadRequest("exist user");
+                return BadRequest(Response<string>.Fail("exist user", 400));
             }
 
             var registerResult = _userService.Register(userForRegisterDto, userForRegisterDto.Password);
