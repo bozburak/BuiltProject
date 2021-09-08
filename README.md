@@ -13,7 +13,7 @@
   <h3>Start Only API</h3>
     - change the startup project from the solution explorer (set as startup project API layer)
   <h3>Start API and WEB (Client)</h3> 
-   // i stopped developing Web Project because i will create new front end with angular.
+   // i stopped developing Web Project because this project for only back end.
    <br>
   <br>
    -change the startup project from the solution explorer (set as startup project WEB layer)
